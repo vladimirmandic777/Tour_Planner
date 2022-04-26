@@ -1,9 +1,9 @@
-package at.technikum.tour_planner;
+package at.technikum.tour_planner.main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class TourController {
     @FXML
     private Label welcomeText;
 
@@ -11,4 +11,9 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+
+    private Tour[] tourList = new Tour[5];
+
+
+
 }
