@@ -1,3 +1,4 @@
-at\technikum\tour_planner\HelloController.class
+at\technikum\tour_planner\main\Tour.class
 module-info.class
 at\technikum\tour_planner\HelloApplication.class
+at\technikum\tour_planner\main\TourController.class
