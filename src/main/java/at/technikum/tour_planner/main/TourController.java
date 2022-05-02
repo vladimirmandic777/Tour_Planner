@@ -12,7 +12,7 @@ public class TourController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    private Tour[] tourList = new Tour[5];
+   // private Tour[] tourList = new Tour[5];
 
 
 
