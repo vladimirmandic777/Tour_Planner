@@ -13,6 +13,6 @@ module at.technikum.tour_planner {
 
     opens at.technikum.tour_planner to javafx.fxml;
     exports at.technikum.tour_planner;
-    exports at.technikum.tour_planner.main;
-    opens at.technikum.tour_planner.main to javafx.fxml;
+    exports at.technikum.tour_planner.controllers;
+    opens at.technikum.tour_planner.controllers to javafx.fxml;
 }
