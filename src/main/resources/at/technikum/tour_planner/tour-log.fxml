@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourLogController">
+<VBox style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourLogController">
 
             <HBox>
-                <children>
-                    <Label prefHeight="17.0" prefWidth="174.0" text="Logs:" GridPane.valignment="BOTTOM" />
-                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="➕" GridPane.columnIndex="2" GridPane.valignment="BOTTOM" />
-                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="31.0" text="➖" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-                    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" text="🛠" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" />
-                </children>
+                    <Label text="Logs:" />
+                    <Button text="➕" GridPane.columnIndex="2">
+                        <HBox.margin>
+                            <Insets left="100.0" />
+                        </HBox.margin></Button>
+                    <Button text="➖">
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin></Button>
+                    <Button text="🛠">
+                        <HBox.margin>
+                            <Insets left="10.0" />
+                        </HBox.margin></Button>
             </HBox>
-            <TableView prefHeight="450.0" prefWidth="1044.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <TableView VBox.vgrow="ALWAYS">
                 <columns>
                     <TableColumn prefWidth="75.0" text="Date" />
                     <TableColumn prefWidth="75.0" text="Duration" />
