@@ -1,5 +1,7 @@
 package at.technikum.tour_planner.viewModels;
 
+import at.technikum.tour_planner.model.TourFx;
+
 public class MainWindowViewModel {
     private NavigationBarViewModel navigationBarViewModel;
     private SearchBarViewModel searchBarViewModel;
@@ -15,5 +17,13 @@ public class MainWindowViewModel {
         this.tourListViewModel = tourListViewModel;
         this.tourDetailViewModel = tourDetailViewModel;
         this.tourLogViewModel = tourLogViewModel;
+
+
+        this.tourListViewModel.addSelectionChangedListener(this::selectTour);
+    }
+
+
+    private void selectTour(TourFx tourFx) {
+        tourDetailViewModel.setTourModel(tourFx);
     }
 }

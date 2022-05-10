@@ -13,7 +13,8 @@
 
             </TabPane>
             <Label prefHeight="17.0" prefWidth="106.0" text="Title:">
-                </Label>
+                <TextField fx:id="nameTextField" HBox.hgrow="ALWAYS"/>
+            </Label>
    <ScrollPane prefHeight="167.0" prefWidth="640.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
    <Label text="Label" GridPane.columnIndex="1" />
    <columnConstraints>

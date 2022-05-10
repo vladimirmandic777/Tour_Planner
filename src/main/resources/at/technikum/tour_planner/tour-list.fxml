@@ -25,6 +25,6 @@
                     <Insets left="10.0" />
                 </HBox.margin></Button>
         </HBox>
-        <ListView prefHeight="491.0" prefWidth="307.0" style="-fx-border-color: black;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
+        <ListView fx:id="listView" prefHeight="491.0" prefWidth="307.0" style="-fx-border-color: black;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
     </VBox>
 

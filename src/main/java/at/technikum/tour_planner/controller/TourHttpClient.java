@@ -1,21 +1,25 @@
 package at.technikum.tour_planner.controller;
 
 import at.technikum.tour_planner.model.TourFx;
-
-
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 
 import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Collections;
+import java.util.List;
 
 
 public class TourHttpClient {
 
+    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static final Logger logger = Logger.getLogger(TourHttpClient.class);
 
-    public static void main(String[] args) {
+    public List<TourFx> getToursbyRequest() {
         try {
             // Create a new HttpClient
             HttpClient client = HttpClient.newBuilder()
@@ -34,26 +38,19 @@ public class TourHttpClient {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             // Print the status code
-            System.out.println("Status code: " + response.statusCode());
+            logger.info("Status code: " + response.statusCode());
 
             // Print the response headers
-            response.headers().map().forEach((k, v) -> System.out.println(k + ": " + v));
+            response.headers().map().forEach((k, v) -> logger.info(k + ": " + v));
 
             // Print the response body
-            System.out.println("Response body:");
-            System.out.println(response.body());
+            logger.info("Response body:");
+            logger.info(response.body());
 
-            // Object Mapper
-            // ObjectMapper objMapper = new ObjectMapper();
-            //    TourFx[] fx = objMapper.readValue(response.body(), TourFx[].class);
-
-            TourFx data = new Gson().fromJson(response.body(), TourFx.class);
-
-            System.out.println(data);
-
-
+            return objectMapper.readValue(response.body(), new TypeReference<List<TourFx>>() {});
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return Collections.emptyList();
     }
 }

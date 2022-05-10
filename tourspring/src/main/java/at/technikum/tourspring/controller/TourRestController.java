@@ -15,8 +15,7 @@ public class TourRestController {
     private TourService tourService;
 
     @GetMapping(path = "/all")
-    public @ResponseBody
-    Iterable<Tour> findAll() {
+    public @ResponseBody Iterable<Tour> findAll() {
         return tourService.findAll();
     }
 

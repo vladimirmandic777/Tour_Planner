@@ -12,10 +12,11 @@ module at.technikum.tour_planner {
     requires lombok;
     requires com.fasterxml.jackson.databind;
     requires java.net.http;
-    requires com.google.gson;
+    requires log4j;
 
     opens at.technikum.tour_planner to javafx.fxml;
     exports at.technikum.tour_planner;
+    exports at.technikum.tour_planner.model to com.fasterxml.jackson.databind;
     exports at.technikum.tour_planner.controllers;
     opens at.technikum.tour_planner.controllers to javafx.fxml;
 }
