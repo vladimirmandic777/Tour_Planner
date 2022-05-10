@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
+<VBox prefHeight="45.0" prefWidth="307.0" GridPane.rowSpan="2147483647"
+      xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourListController"
+      style="-fx-border-color: grey;">
 
-    <VBox xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="at.technikum.tour_planner.controllers.TourListController"
-          prefHeight="45.0" prefWidth="307.0" GridPane.rowSpan="2147483647">
-
-        <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
-            <Label prefHeight="31.0" prefWidth="180.0" text="Tours" GridPane.valignment="BOTTOM" />
-            <Button id="addTour" mnemonicParsing="false" prefHeight="25.0" prefWidth="37.0" text="➕" GridPane.columnIndex="2" GridPane.valignment="BOTTOM" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="34.0" text="➖" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+        <HBox>
+            <Label text="Tours" />
+            <Button id="addTour" fx:id="addTour" text="➕">
+                <HBox.margin>
+                    <Insets left="100.0" />
+                </HBox.margin></Button>
+            <Button id="deleteTour" fx:id="deleteTour" text="➖">
                 <HBox.margin>
                     <Insets left="10.0" />
                 </HBox.margin></Button>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="37.0" text="🛠" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <Button text="🛠">
                 <HBox.margin>
                     <Insets left="10.0" />
                 </HBox.margin></Button>
         </HBox>
-        <ListView prefHeight="491.0" prefWidth="307.0" style="-fx-border-color: black;" GridPane.rowIndex="1" GridPane.rowSpan="2147483647" />
+        <ListView VBox.vgrow="ALWAYS" />
     </VBox>
-

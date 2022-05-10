@@ -5,101 +5,19 @@
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" prefHeight="705.0" prefWidth="941.0" style="-fx-border-color: black; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.MainWindowController">
-      <children>
-         <GridPane prefHeight="805.0" prefWidth="800.0" style="-fx-border-color: black;">
-           <columnConstraints>
-             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-           </columnConstraints>
-           <rowConstraints>
-            <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
-             <RowConstraints maxHeight="169.0" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
-             <RowConstraints maxHeight="240.0" minHeight="0.0" prefHeight="61.0" vgrow="SOMETIMES" />
-             <RowConstraints maxHeight="585.0" minHeight="6.0" prefHeight="546.0" vgrow="SOMETIMES" />
-           </rowConstraints>
-            <children>
-               <Label prefHeight="17.0" prefWidth="374.0" text="Tour-Planner" />
-               <GridPane id="SearchBar" prefHeight="36.0" prefWidth="938.0" GridPane.rowIndex="2">
-                   <fx:include fx:id="searchBar" source="search-bar.fxml" />
-               <columnConstraints>
-                  <ColumnConstraints />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-               </rowConstraints>
 
-               </GridPane>
-               <GridPane prefHeight="229.0" prefWidth="732.0" GridPane.rowIndex="3">
-                 <columnConstraints>
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="237.0" />
-                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="756.3333333333334" minWidth="10.0" prefWidth="560.5" />
-                 </columnConstraints>
-                 <rowConstraints>
-                     <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-                   <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                   <RowConstraints maxHeight="88.0" minHeight="0.0" prefHeight="88.0" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="307.0" vgrow="SOMETIMES" />
-                 </rowConstraints>
-                  <children>
-                     <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-                       <columnConstraints>
-                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                       </columnConstraints>
-                       <rowConstraints>
-                         <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
-                         <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-                       </rowConstraints>
-                     </GridPane>
+    <fx:include fx:id="navigationBar" source="navigation-bar.fxml" />
 
-                     <fx:include source="tour-list.fxml" />
+    <fx:include fx:id="searchBar" source="search-bar.fxml" />
 
-                     <GridPane prefHeight="149.0" prefWidth="620.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
-                         <fx:include source="tour-detail.fxml" />
-                     <columnConstraints>
-                        <ColumnConstraints />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints />
-                     </rowConstraints>
-                     <GridPane.margin>
-                        <Insets left="10.0" />
-                     </GridPane.margin>
+    <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
+        <fx:include source="tour-list.fxml" />
+        <VBox spacing="5">
+            <fx:include source="tour-detail.fxml"/>
 
-                     </GridPane>
-
-                  <GridPane prefHeight="315.0" prefWidth="630.0" style="-fx-border-color: black;" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.rowSpan="2">
-                  <fx:include source="tour-log.fxml" />
-                     <columnConstraints>
-                        <ColumnConstraints />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints />
-                     </rowConstraints>
-                     <padding>
-                        <Insets top="20.0" />
-                     </padding>
-                     <GridPane.margin>
-                        <Insets top="20.0" />
-                     </GridPane.margin>
+            <fx:include source="tour-log.fxml" />
+        </VBox>
+    </SplitPane>
 
 
-                  </GridPane>
-
-                  </children>
-               </GridPane>
-
-
-                <GridPane prefHeight="51.0" prefWidth="935.0" GridPane.rowIndex="1">
-                <fx:include fx:id="navigationBar" source="navigation-bar.fxml" />
-               <columnConstraints>
-                  <ColumnConstraints />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-               </rowConstraints>
-
-                </GridPane>
-            </children>
-
-         </GridPane>
-      </children></VBox>
+   </VBox>
