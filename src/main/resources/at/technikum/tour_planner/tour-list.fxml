@@ -23,5 +23,5 @@
                     <Insets left="10.0" />
                 </HBox.margin></Button>
         </HBox>
-        <ListView VBox.vgrow="ALWAYS" />
+        <ListView fx:id="listView" VBox.vgrow="ALWAYS" />
     </VBox>

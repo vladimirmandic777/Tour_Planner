@@ -11,7 +11,7 @@
     <HBox>
         <Label alignment="CENTER" prefHeight="25.0" prefWidth="73.0" text="Title:" />
 
-        <TextField fx:id="tourName" text="" HBox.hgrow="ALWAYS">
+        <TextField fx:id="nameTextField" text="" HBox.hgrow="ALWAYS">
         <HBox.margin>
             <Insets left="20.0" />
         </HBox.margin></TextField>
