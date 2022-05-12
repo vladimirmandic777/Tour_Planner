@@ -1,3 +1,6 @@
+package uiTest;
+
+import at.technikum.tour_planner.FXMLDependencyInjection;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.junit.jupiter.api.Test;
@@ -14,12 +17,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.Locale;
+
 
 import static org.testfx.assertions.api.Assertions.assertThat;
 
 @ExtendWith(ApplicationExtension.class)
-class ClickableButtonTest_JUnit5AssertJ {
+class SearchUiTest {
 
 
     /**
@@ -29,21 +33,34 @@ class ClickableButtonTest_JUnit5AssertJ {
      */
     @Start
     private void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/tour-list.fxml"));
-        stage.setScene(new Scene(root, 100, 100));
+        Parent root = FXMLDependencyInjection.load("MainWindow.fxml", Locale.GERMAN);
+        stage.setScene(new Scene(root, 600, 600));
         stage.show();
     }
 
     @Test
     void testSearchWithBar(FxRobot robot) {
-        // or (lookup by css id):
         robot.lookup("#searchTextField").queryTextInputControl().setText("H");
-        robot.lookup("#searchButton").queryAs(Button.class).fire();
-
-        assertThat(robot.lookup("#listView").queryTableView())
-                .hasExactlyNumRows(1)
-                .containsRow("Test");
+        robot.clickOn("#searchButton");
+        assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(1);
     }
+
+    @Test
+    void testSearchWithNoValue(FxRobot robot) {
+        robot.lookup("#searchTextField").queryTextInputControl().setText("Vladi");
+        robot.clickOn("#searchButton");
+        assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(0);
+    }
+
+    @Test
+    void testSearchWithDeleteSearchInput(FxRobot robot) {
+        robot.lookup("#searchTextField").queryTextInputControl().setText("Vladi");
+        robot.clickOn("#searchButton");
+        robot.clickOn("#clearButton");
+        assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(2);
+    }
+
+
 
     /*
 

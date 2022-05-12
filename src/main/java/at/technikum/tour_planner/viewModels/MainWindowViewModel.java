@@ -25,7 +25,7 @@ public class MainWindowViewModel {
     }
 
     private void searchTours(String searchString) {
-        var tours = BL.getInstance().findMatchingTours( searchString );
+        var tours = BL.getInstance().findMatchingTours(searchString);
         tourListViewModel.setTours(tours);
     }
 

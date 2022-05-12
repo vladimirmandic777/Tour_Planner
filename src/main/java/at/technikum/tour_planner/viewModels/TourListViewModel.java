@@ -57,8 +57,8 @@ public class TourListViewModel {
         }
     }
 
-    public void setTours(List<TourFx> mediaItems) {
+    public void setTours(List<TourFx> tourItem) {
         data.clear();
-        data.addAll(mediaItems);
+        data.addAll(tourItem);
     }
 }
