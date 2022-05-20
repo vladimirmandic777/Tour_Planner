@@ -1,7 +1,7 @@
 package at.technikum.tour_planner.viewModels;
 
 import at.technikum.tour_planner.model.TourFx;
-import at.technikum.tour_planner.search.BL;
+import at.technikum.tour_planner.service.SearchService;
 
 public class MainWindowViewModel {
     private NavigationBarViewModel navigationBarViewModel;
@@ -25,7 +25,7 @@ public class MainWindowViewModel {
     }
 
     private void searchTours(String searchString) {
-        var tours = BL.getInstance().findMatchingTours(searchString);
+        var tours = SearchService.getInstance().findMatchingTours(searchString);
         tourListViewModel.setTours(tours);
     }
 
