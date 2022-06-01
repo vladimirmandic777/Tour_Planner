@@ -4,9 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.14-internal"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourDetailController"
-      style="-fx-border-color: grey;">
+<VBox style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourDetailController">
 
     <HBox>
         <Label alignment="CENTER" prefHeight="25.0" prefWidth="73.0" text="Title:" />
@@ -16,12 +14,57 @@
             <Insets left="20.0" />
         </HBox.margin></TextField>
     </HBox>
-    <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+    <SplitPane orientation="VERTICAL" VBox.vgrow="ALWAYS">
 
     <TabPane tabClosingPolicy="UNAVAILABLE">
                 <tabs>
                     <Tab fx:id="routeTab" text="Route">
-                        <AnchorPane />
+
+                        <VBox>
+                            <HBox>
+                                <Label prefWidth="70" text="tourName">
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding></Label>
+                                <TextField fx:id="tourName" text="" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                            <HBox>
+                                <Label prefWidth="70" text="tourFrom">
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding></Label>
+                                <TextField fx:id="tourFrom" text="" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                            <HBox>
+                                <Label prefWidth="70" text="tourTo">
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding></Label>
+                                <TextField fx:id="tourTo" text="" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                            <HBox>
+                                <Label prefWidth="70" text="tourTransport">
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding></Label>
+                                <TextField fx:id="tourTransport" text="" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                            <HBox>
+                                <Label prefWidth="70" text="tourDistance">
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding></Label>
+                                <TextField fx:id="tourDistance" text="" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                            <HBox>
+                                <Label prefWidth="70" text="tourDuration">
+                        <padding>
+                           <Insets right="10.0" />
+                        </padding></Label>
+                                <TextField fx:id="tourDuration" text="" HBox.hgrow="ALWAYS" />
+                            </HBox>
+                        </VBox>
+
                     </Tab>
                     <Tab fx:id="descriptionTab" text="Description">
                         <TextArea />
