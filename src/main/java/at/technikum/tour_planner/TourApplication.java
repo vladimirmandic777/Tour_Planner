@@ -18,7 +18,7 @@ public class TourApplication extends Application {
 
         Parent root = FXMLDependencyInjection.load("MainWindow.fxml", Locale.GERMAN);
 
-        Scene scene = new Scene(root, 600, 400);
+        Scene scene = new Scene(root, 800, 600);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Tour Planner");

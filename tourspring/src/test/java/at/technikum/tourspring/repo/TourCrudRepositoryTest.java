@@ -20,8 +20,8 @@ public class TourCrudRepositoryTest {
     {
         Tour tour = Tour.builder().id(1).name("Test").description("test").fromDestination("Austria").toDestination("Vienna")
                 .transport("Car").distance(10).estimatedTime(10).routeInformation("Ja").build();
-        Tour tour1 = Tour.builder().id(2).name("HAllo").description("test").fromDestination("Austria").toDestination("Vienna")
-                .transport("Car").distance(10).estimatedTime(10).routeInformation("Ja").build();
+        Tour tour1 = Tour.builder().id(2).name("HAllo").description("test").fromDestination("Austria").toDestination("Graz")
+                .transport("Bike").distance(10).estimatedTime(10).routeInformation("Ja").build();
 
         Tour a = tourCrudRepository.save(tour);
         Tour aa = tourCrudRepository.save(tour1);
