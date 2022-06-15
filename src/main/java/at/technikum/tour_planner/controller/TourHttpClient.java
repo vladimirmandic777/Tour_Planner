@@ -1,10 +1,12 @@
 package at.technikum.tour_planner.controller;
 
+import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.model.TourFx;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -12,28 +14,105 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 
-public class TourHttpClient {
+public class TourHttpClient implements Dao<TourFx> {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger logger = Logger.getLogger(TourHttpClient.class);
 
-    public List<TourFx> getToursbyRequest() {
-        try {
-            // Create a new HttpClient
-            HttpClient client = HttpClient.newBuilder()
-                    .version(HttpClient.Version.HTTP_2)
-                    .connectTimeout(Duration.ofSeconds(5))
-                    .build();
+    private HttpClient client = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_2)
+            .connectTimeout(Duration.ofSeconds(5))
+            .build();
 
+    @Override
+    public Optional<TourFx> get(int id) {
+        try {
+            // Create a request
+            HttpRequest request = getHttpRequest(Integer.toString(id));
+            HttpResponse<String> response = getHttpResponse(request);
+
+            return Optional.of(objectMapper.readValue(response.body(), new TypeReference<List<TourFx>>() {
+            }).get(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+
+    @Override
+    public List<TourFx> getAll() {
+        try {
+            // Create a request
+            HttpRequest request = getHttpRequest("all");
+
+            // Execute the request
+            HttpResponse<String> response = getHttpResponse(request);
+
+            return objectMapper.readValue(response.body(), new TypeReference<List<TourFx>>() {});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
+    public TourFx create() {
+        return null;
+    }
+
+    @Override
+    public void update(TourFx tourFx, List<?> params) {
+
+    }
+
+    @Override
+    public void update(TourFx tourFx) throws URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI("http://localhost:8080/tour/update"))
+                .header("User-Agent", "Java 11 HttpClient Bot")
+                .PUT((HttpRequest.BodyPublisher) tourFx)
+                .build();
+
+        HttpResponse<String> response = getHttpResponse(request);
+
+        // Print the response body
+        logger.info("Response body:");
+        logger.info(response.body());
+    }
+
+    @Override
+    public void delete(TourFx tourFx) {
+        try {
             // Create a request
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/tour/all"))
+                    .uri(new URI("http://localhost:8080/tour/delete" + tourFx))
                     .header("User-Agent", "Java 11 HttpClient Bot")
-                    .GET()
+                    .DELETE()
                     .build();
 
+            // Execute the request
+            HttpResponse<String> response = getHttpResponse(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    private HttpRequest getHttpRequest(String s) throws URISyntaxException {
+        return HttpRequest.newBuilder()
+                .uri(new URI("http://localhost:8080/tour/" + s))
+                .header("User-Agent", "Java 11 HttpClient Bot")
+                .GET()
+                .build();
+    }
+
+    private HttpResponse<String> getHttpResponse(HttpRequest request)  {
+        try {
             // Execute the request
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -46,11 +125,11 @@ public class TourHttpClient {
             // Print the response body
             logger.info("Response body:");
             logger.info(response.body());
-
-            return objectMapper.readValue(response.body(), new TypeReference<List<TourFx>>() {});
-        } catch (Exception e) {
+            return response;
+        } catch(IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        return Collections.emptyList();
+
+        return null;
     }
 }

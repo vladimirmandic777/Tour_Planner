@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import org.apache.log4j.Logger;
 
 public class SearchBarController {
@@ -21,15 +22,15 @@ public class SearchBarController {
 
     @FXML
     void initialize() {
-        searchTextField.textProperty().bindBidirectional(viewModel.searchStringProperty() );
-        searchButton.disableProperty().bind(viewModel.searchDisabledBinding() );
+        searchTextField.textProperty().bindBidirectional(viewModel.searchStringProperty());
     }
 
     public SearchBarController(SearchBarViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
-    public void onSearchButton(ActionEvent actionEvent) {
+
+    public void onSearchKey(KeyEvent actionEvent) {
         viewModel.doSearch();
         logger.info("Searching...");
     }

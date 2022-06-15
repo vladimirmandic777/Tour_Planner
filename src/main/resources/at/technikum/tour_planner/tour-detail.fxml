@@ -7,7 +7,7 @@
 <VBox style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourDetailController">
 
     <HBox>
-        <Label alignment="CENTER" prefHeight="25.0" prefWidth="73.0" text="Title:" />
+        <Label alignment="CENTER" prefHeight="25.0" prefWidth="73.0" text="Title:" onKeyPressed="#changeTitle" />
 
         <TextField fx:id="nameTextField" text="" HBox.hgrow="ALWAYS">
         <HBox.margin>

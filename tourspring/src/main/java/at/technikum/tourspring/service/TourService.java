@@ -35,5 +35,6 @@ public class TourService {
         tourCrudRepository.deleteById(id);
     }
 
+    public void updateById(Tour tour) { tourCrudRepository.saveAndFlush(tour);}
 
 }

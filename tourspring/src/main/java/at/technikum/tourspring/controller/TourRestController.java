@@ -40,4 +40,10 @@ public class TourRestController {
         tourService.deleteById(id);
     }
 
+
+    @PutMapping(path = "/update/{tour}")
+    public void updatePlayer(@PathVariable(name = "tour") Tour tour) {
+        tourService.updateById(tour);
+    }
+
 }

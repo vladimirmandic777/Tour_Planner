@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 public class TourDetailController {
     private final TourDetailViewModel viewModel;
@@ -43,5 +44,9 @@ public class TourDetailController {
     public void onUpdateButton(ActionEvent actionEvent) {
         System.out.println("Update Button clicked");
 
+    }
+
+    public void changeTitle(KeyEvent keyEvent) {
+       // viewModel.updateTourModel();
     }
 }

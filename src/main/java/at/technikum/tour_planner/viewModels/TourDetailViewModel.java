@@ -36,7 +36,7 @@ public class TourDetailViewModel {
     }
 
 
-    private void updateTourModel() {
+    public void updateTourModel() {
         if (!isInitValue)
             DAL.getInstance().tourDao().update(tourFx, Arrays.asList(tourFx.getId(), name.get(),from.get(), to.get()));
     }

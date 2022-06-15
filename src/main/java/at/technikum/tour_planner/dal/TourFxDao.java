@@ -3,6 +3,7 @@ package at.technikum.tour_planner.dal;
 import at.technikum.tour_planner.controller.TourHttpClient;
 import at.technikum.tour_planner.model.TourFx;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class TourFxDao implements Dao<TourFx>  {
     private TourHttpClient httpClient = new TourHttpClient();
 
     public TourFxDao() {
-        tourItemsList.addAll(httpClient.getToursbyRequest());
+        tourItemsList.addAll(httpClient.getAll());
     }
 
     @Override
@@ -44,6 +45,13 @@ public class TourFxDao implements Dao<TourFx>  {
         tourFx.setDistance(Integer.parseInt(params.get(6).toString()));
         tourFx.setEstimatedTime(Integer.parseInt(params.get(7).toString()));
         tourFx.setRouteInformation(Objects.requireNonNull(params.get(8), "transport cannot be null").toString());
+
+        //httpClient.update(tourFx);
+    }
+
+    @Override
+    public void update(TourFx tourFx) throws URISyntaxException {
+
     }
 
     @Override

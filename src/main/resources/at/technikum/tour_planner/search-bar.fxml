@@ -10,16 +10,11 @@
     <userData>
         <fx:reference source="controller"/>
     </userData>
-    <TextField fx:id="searchTextField" HBox.hgrow="SOMETIMES">
+    <TextField fx:id="searchTextField" HBox.hgrow="SOMETIMES" onKeyPressed="#onSearchKey">
     <HBox.margin>
         <Insets right="50.0" />
     </HBox.margin>
     </TextField>
 
-    <Button fx:id="searchButton" text="🔎" onAction="#onSearchButton">
-    <HBox.margin>
-        <Insets right="10.0" />
-    </HBox.margin>
-    </Button>
     <Button fx:id="clearButton" text="✖" onAction="#onClearButton"/>
 </HBox>
