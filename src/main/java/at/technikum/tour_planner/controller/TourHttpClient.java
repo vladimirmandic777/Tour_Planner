@@ -2,6 +2,7 @@ package at.technikum.tour_planner.controller;
 
 import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.model.TourFx;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
@@ -73,10 +74,19 @@ public class TourHttpClient implements Dao<TourFx> {
 
     @Override
     public void update(TourFx tourFx) throws URISyntaxException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody;
+        try {
+            requestBody = objectMapper
+                    .writerWithDefaultPrettyPrinter()
+                    .writeValueAsString(tourFx);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI("http://localhost:8080/tour/update"))
                 .header("User-Agent", "Java 11 HttpClient Bot")
-                .PUT((HttpRequest.BodyPublisher) tourFx)
+                .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
 
         HttpResponse<String> response = getHttpResponse(request);
@@ -84,6 +94,7 @@ public class TourHttpClient implements Dao<TourFx> {
         // Print the response body
         logger.info("Response body:");
         logger.info(response.body());
+        System.out.println(response.body());
     }
 
     @Override

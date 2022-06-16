@@ -4,7 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourLogController">
+<VBox style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="at.technikum.tour_planner.controllers.TourLogController">
 
             <HBox>
                     <Label text="Logs:" />

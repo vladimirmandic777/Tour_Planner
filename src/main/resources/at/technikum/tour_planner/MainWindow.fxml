@@ -12,7 +12,7 @@
 
     <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
         <fx:include source="tour-list.fxml" />
-        <VBox spacing="5">
+        <VBox spacing="2">
             <fx:include source="tour-detail.fxml"/>
 
             <fx:include source="tour-log.fxml" />
