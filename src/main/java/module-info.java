@@ -12,7 +12,6 @@ module at.technikum.tour_planner {
     requires lombok;
     requires com.fasterxml.jackson.databind;
     requires java.net.http;
-    requires log4j;
 
     opens at.technikum.tour_planner to javafx.fxml;
     exports at.technikum.tour_planner;

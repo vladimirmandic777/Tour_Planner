@@ -7,7 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -21,6 +22,7 @@ public class TourHttpClient implements Dao<TourFx> {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger logger = Logger.getLogger(TourHttpClient.class);
+
 
     private HttpClient client = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
