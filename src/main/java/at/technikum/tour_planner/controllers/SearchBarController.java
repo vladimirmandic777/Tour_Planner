@@ -1,5 +1,7 @@
 package at.technikum.tour_planner.controllers;
 
+import at.technikum.tour_planner.logger.ILoggerWrapper;
+import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.viewModels.SearchBarViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +14,7 @@ public class SearchBarController {
     private final SearchBarViewModel viewModel;
 
 
-    private static final Logger logger = LogManager.getLogger(SearchBarController.class);
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
     @FXML
     public Button searchButton;

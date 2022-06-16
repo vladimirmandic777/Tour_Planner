@@ -1,11 +1,12 @@
 package at.technikum.tour_planner.controller;
 
 import at.technikum.tour_planner.dal.Dao;
+import at.technikum.tour_planner.logger.ILoggerWrapper;
+import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URI;
@@ -19,10 +20,11 @@ import java.util.List;
 import java.util.Optional;
 
 
+
 public class TourHttpClient implements Dao<TourFx> {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
-    private static final Logger logger = Logger.getLogger(TourHttpClient.class);
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
 
 
     private HttpClient client = HttpClient.newBuilder()
@@ -92,8 +94,8 @@ public class TourHttpClient implements Dao<TourFx> {
         HttpResponse<String> response = getHttpResponse(request);
 
         // Print the response body
-        logger.info("Response body:");
-        logger.info(response.body());
+        logger.debug("Response body:");
+        logger.debug(response.body());
         System.out.println(response.body());
     }
 
@@ -130,14 +132,14 @@ public class TourHttpClient implements Dao<TourFx> {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             // Print the status code
-            logger.info("Status code: " + response.statusCode());
+            logger.debug("Status code: " + response.statusCode());
 
             // Print the response headers
-            response.headers().map().forEach((k, v) -> logger.info(k + ": " + v));
+            response.headers().map().forEach((k, v) -> logger.debug(k + ": " + v));
 
             // Print the response body
-            logger.info("Response body:");
-            logger.info(response.body());
+            logger.debug("Response body:");
+            logger.debug(response.body());
             return response;
         } catch(IOException | InterruptedException e) {
             e.printStackTrace();
