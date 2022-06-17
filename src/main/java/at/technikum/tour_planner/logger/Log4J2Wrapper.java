@@ -1,12 +1,11 @@
 package at.technikum.tour_planner.logger;
 
+import at.technikum.tour_planner.TourApplication;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.util.Loader;
 
-// Wraps the log4j2 logger instances by realizing interface ILoggerWrapper
-// This avoids direct dependencies to log4j2 package
 public class Log4J2Wrapper implements ILoggerWrapper {
-
     private Logger logger;
     private LoggerStateBase state = new UninitializedState();
 
@@ -32,6 +31,7 @@ public class Log4J2Wrapper implements ILoggerWrapper {
     }
 
     public void initialize() {
-        this.state = new InitialzedState(LogManager.getLogger(this.getClass().getName()));
+        System.out.println("RES:" + TourApplication.class.getResource("log4j2.xml"));
+        this.state = new InitializedState(LogManager.getLogger(this.getClass().getName()));
     }
 }

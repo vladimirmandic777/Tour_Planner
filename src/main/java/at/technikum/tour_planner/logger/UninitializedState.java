@@ -1,7 +1,6 @@
 package at.technikum.tour_planner.logger;
 
 public class UninitializedState extends LoggerStateBase {
-
     @Override
     public void debug(String message) {
         this.printUninitializedWarning();
@@ -25,13 +24,14 @@ public class UninitializedState extends LoggerStateBase {
         this.printUninitializedWarning();
         return;
     }
-    @Override
+
+   @Override
     public void info(String message) {
         this.printUninitializedWarning();
         return;
     }
-
     private void printUninitializedWarning() {
         System.out.println("Operation was called in state uninitialized.");
     }
+
 }

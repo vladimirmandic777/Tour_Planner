@@ -7,11 +7,15 @@ import javafx.event.ActionEvent;
 public class NavigationBarController {
     private final NavigationBarViewModel viewModel;
 
+
     public NavigationBarController(NavigationBarViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
     public void onFileQuitcloseWindow(ActionEvent actionEvent) {
         Platform.exit();
+    }
+    public void onGenerateReportClicked(ActionEvent actionEvent) {
+        viewModel.generateReport();
     }
 }

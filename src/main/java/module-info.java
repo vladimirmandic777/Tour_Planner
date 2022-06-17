@@ -13,6 +13,10 @@ module at.technikum.tour_planner {
     requires com.fasterxml.jackson.databind;
     requires java.net.http;
     requires org.apache.logging.log4j;
+    requires io;
+    requires kernel;
+    requires layout;
+    requires org.apache.logging.log4j.core;
 
     opens at.technikum.tour_planner to javafx.fxml;
     exports at.technikum.tour_planner;

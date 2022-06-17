@@ -13,10 +13,12 @@ import java.util.Locale;
 
 
 public class TourApplication extends Application {
+
     public static void main(String[] args) {
         launch();
     }
     private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -24,7 +26,7 @@ public class TourApplication extends Application {
         logger.fatal("This is a fatal message.");
         logger.warn("This is a warning message.");
         logger.error("This is an error message.");
-        logger.info("This is an info message.");
+        //logger.info("This is an info message.");
 
 
 

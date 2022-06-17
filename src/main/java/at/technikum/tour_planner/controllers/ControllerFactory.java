@@ -1,5 +1,7 @@
 package at.technikum.tour_planner.controllers;
 
+import at.technikum.tour_planner.BAL.PDFReportService;
+import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.viewModels.*;
 
 public class ControllerFactory {
@@ -12,7 +14,7 @@ public class ControllerFactory {
 
 
     public ControllerFactory() {
-        navigationBarViewModel = new NavigationBarViewModel();
+        navigationBarViewModel = new NavigationBarViewModel(new PDFReportService(DAL.getInstance().tourDao()));
         tourListViewModel = new TourListViewModel();
         tourDetailViewModel = new TourDetailViewModel();
         searchBarViewModel = new SearchBarViewModel();

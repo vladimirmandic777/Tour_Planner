@@ -2,11 +2,11 @@ package at.technikum.tour_planner.logger;
 
 import org.apache.logging.log4j.Logger;
 
-public class InitialzedState extends LoggerStateBase {
+public class InitializedState extends LoggerStateBase {
 
     private final Logger logger;
 
-    public InitialzedState(Logger logger) {
+    public InitializedState(Logger logger) {
         this.logger = logger;
     }
 
@@ -29,7 +29,7 @@ public class InitialzedState extends LoggerStateBase {
     public void warn(String message) {
         this.logger.warn(message);
     }
-    @Override
+   @Override
     public void info(String message) {
         this.logger.info(message);
     }
