@@ -1,8 +1,8 @@
 package at.technikum.tour_planner.viewModels;
 
+import at.technikum.tour_planner.BAL.MapTourService;
 import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.model.TourFx;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -19,7 +19,11 @@ public class TourDetailViewModel {
     private volatile boolean isInitValue = false;
     private TourFx tourFx;
 
+  //  private final MapTourService mapTourService;
+
+   // public TourDetailViewModel(MapTourService mapTourService) {
     public TourDetailViewModel() {
+       // this.mapTourService = mapTourService;
         name.addListener((arg, oldVal, newVal) -> updateTourModel());
         from.addListener((arg, oldVal, newVal) -> updateTourModel());
         to.addListener((arg, oldVal, newVal) -> updateTourModel());

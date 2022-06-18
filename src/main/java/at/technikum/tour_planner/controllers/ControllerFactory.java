@@ -1,7 +1,9 @@
 package at.technikum.tour_planner.controllers;
 
+import at.technikum.tour_planner.BAL.MapTourServiceImpl;
 import at.technikum.tour_planner.BAL.PDFReportService;
 import at.technikum.tour_planner.dal.DAL;
+import at.technikum.tour_planner.dal.map.MapTourRepository;
 import at.technikum.tour_planner.viewModels.*;
 
 public class ControllerFactory {
@@ -15,8 +17,9 @@ public class ControllerFactory {
 
     public ControllerFactory() {
         navigationBarViewModel = new NavigationBarViewModel(new PDFReportService(DAL.getInstance().tourDao()));
-        tourListViewModel = new TourListViewModel();
+        tourListViewModel = new TourListViewModel(DAL.getInstance().tourDao());
         tourDetailViewModel = new TourDetailViewModel();
+     //   tourDetailViewModel = new TourDetailViewModel(new MapTourServiceImpl(new MapTourRepository()));
         searchBarViewModel = new SearchBarViewModel();
         tourLogViewModel = new TourLogViewModel();
 

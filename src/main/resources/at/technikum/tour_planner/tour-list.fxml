@@ -10,11 +10,11 @@
 
         <HBox>
             <Label text="Tours" />
-            <Button id="addTour" fx:id="addTour" text="➕">
+            <Button id="addTour" fx:id="addTour" text="➕" onAction="#onButtonAdd">
                 <HBox.margin>
                     <Insets left="100.0" />
                 </HBox.margin></Button>
-            <Button id="deleteTour" fx:id="deleteTour" text="➖">
+            <Button id="deleteTour" fx:id="deleteTour" onAction="#onButtonRemove" text="➖">
                 <HBox.margin>
                     <Insets left="10.0" />
                 </HBox.margin></Button>

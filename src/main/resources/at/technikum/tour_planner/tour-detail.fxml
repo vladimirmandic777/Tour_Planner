@@ -69,7 +69,6 @@
                                 <TextField fx:id="tourDuration" text="" HBox.hgrow="ALWAYS" />
                             </HBox>
                   <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onUpdateButton" text="Update" textAlignment="CENTER" />
-                  <Button fx:id="deleteButton" alignment="BASELINE_RIGHT" mnemonicParsing="false" onMouseClicked="#onDeleteButton" text="Delete" textAlignment="CENTER" />
                         </VBox>
                         </ScrollPane>
                     </Tab>

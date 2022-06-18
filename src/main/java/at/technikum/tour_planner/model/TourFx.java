@@ -39,6 +39,7 @@ public class TourFx implements Serializable {
     @JsonProperty(value = "routeInformation")
     private String routeInformation;
 
+
     @Override
     public String toString() {
         return name;

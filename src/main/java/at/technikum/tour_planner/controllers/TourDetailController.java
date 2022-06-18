@@ -70,8 +70,4 @@ public class TourDetailController {
        // viewModel.updateTourModel();
     }
 
-    public void onDeleteButton(MouseEvent mouseEvent) {
-        logger.info("Delete Button clicked");
-        DAL.getInstance().tourDao().delete(viewModel.getTourFx());
-    }
 }

@@ -4,10 +4,7 @@ import at.technikum.tour_planner.controller.TourHttpClient;
 import at.technikum.tour_planner.model.TourFx;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class TourFxDao implements Dao<TourFx>  {
     private List<TourFx> tourItemsList = new ArrayList<>();
@@ -30,8 +27,18 @@ public class TourFxDao implements Dao<TourFx>  {
 
     @Override
     public TourFx create() {
-        // Request
-        return null;
+        var tour = new TourFx(getNewID(), "New Tour","","","","",0,0,"");
+        tourItemsList.add(tour);
+        return tour;
+    }
+
+    private int getNewID() {
+        int newId = 1;
+        if (tourItemsList.size() >=1) {
+            tourItemsList.sort(Comparator.comparing(TourFx::getId).reversed());
+            newId = tourItemsList.get(0).getId()+1;
+        }
+        return newId;
     }
 
     @Override

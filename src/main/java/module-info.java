@@ -17,6 +17,8 @@ module at.technikum.tour_planner {
     requires kernel;
     requires layout;
     requires org.apache.logging.log4j.core;
+    requires retrofit2;
+    requires retrofit2.converter.jackson;
 
     opens at.technikum.tour_planner to javafx.fxml;
     exports at.technikum.tour_planner;

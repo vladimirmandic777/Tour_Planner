@@ -2,6 +2,7 @@ package at.technikum.tour_planner.viewModels;
 
 import at.technikum.tour_planner.controller.TourHttpClient;
 import at.technikum.tour_planner.dal.DAL;
+import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.listener.SelectionChangedListener;
 import at.technikum.tour_planner.model.TourFx;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,6 +22,7 @@ public class TourListViewModel {
 
     private final ObservableList<TourFx> data = FXCollections.observableArrayList();
 
+    private final Dao<TourFx> mediaItemDao;
 
     public String getTourName() {
         return tourName.get();
@@ -30,7 +32,8 @@ public class TourListViewModel {
         return tourName;
     }
 
-    public TourListViewModel() {
+    public TourListViewModel(Dao<TourFx> mediaItemDao) {
+        this.mediaItemDao = mediaItemDao;
         setTours(DAL.getInstance().tourDao().getAll() );
     }
 
@@ -60,5 +63,14 @@ public class TourListViewModel {
     public void setTours(List<TourFx> tourItem) {
         data.clear();
         data.addAll(tourItem);
+    }
+
+    public void addNewTour() {
+        var tour = mediaItemDao.create();
+        data.add(tour);
+    }
+
+    public void deleteTour(TourFx tour) {
+        data.remove(tour);
     }
 }
