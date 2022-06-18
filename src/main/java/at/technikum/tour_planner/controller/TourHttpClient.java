@@ -87,8 +87,8 @@ public class TourHttpClient implements Dao<TourFx> {
         }
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI("http://localhost:8080/tour/update"))
-                .header("User-Agent", "Java 11 HttpClient Bot")
-                .PUT(HttpRequest.BodyPublishers.ofString(requestBody))
+                .headers("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
 
         HttpResponse<String> response = getHttpResponse(request);
@@ -104,8 +104,8 @@ public class TourHttpClient implements Dao<TourFx> {
         try {
             // Create a request
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/tour/delete" + tourFx))
-                    .header("User-Agent", "Java 11 HttpClient Bot")
+                    .uri(new URI("http://localhost:8080/tour/delete/" + tourFx.getId()))
+                    .headers("Content-Type", "application/json")
                     .DELETE()
                     .build();
 

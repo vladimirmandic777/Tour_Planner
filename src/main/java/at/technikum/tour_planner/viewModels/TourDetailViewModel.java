@@ -26,7 +26,6 @@ public class TourDetailViewModel {
         transport.addListener((arg, oldVal, newVal) -> updateTourModel());
         distance.addListener((arg, oldVal, newVal) -> updateTourModel());
         duration.addListener((arg, oldVal, newVal) -> updateTourModel());
-
     }
 
     public void setTourModel(TourFx tourFx) {
@@ -53,6 +52,12 @@ public class TourDetailViewModel {
             DAL.getInstance().tourDao().update(tourFx, Arrays.asList(tourFx.getId(), name.get(), "description", from.get(), to.get(), transport.get(), distance.get(), duration.get(), "route info"));
     }
 
+    public void refreshTour() {
+        if (!isInitValue)
+            DAL.getInstance().tourDao().getAll();
+    }
+
+
     public StringProperty nameProperty() {
         return name;
     }
@@ -70,6 +75,10 @@ public class TourDetailViewModel {
     }
     public StringProperty durationProperty() {
         return duration;
+    }
+
+    public TourFx getTourFx() {
+        return tourFx;
     }
 
 }

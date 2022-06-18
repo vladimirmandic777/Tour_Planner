@@ -45,21 +45,15 @@ public class TourFxDao implements Dao<TourFx>  {
         tourFx.setDistance(Integer.parseInt(params.get(6).toString()));
         tourFx.setEstimatedTime(Integer.parseInt(params.get(7).toString()));
         tourFx.setRouteInformation(Objects.requireNonNull(params.get(8), "transport cannot be null").toString());
-
-        try {
-            httpClient.update(tourFx);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
     public void update(TourFx tourFx) throws URISyntaxException {
-
+        httpClient.update(tourFx);
     }
 
     @Override
     public void delete(TourFx tourFx) {
-        tourItemsList.remove(tourFx);
+        httpClient.delete(tourFx);
     }
 }

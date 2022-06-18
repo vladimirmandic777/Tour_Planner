@@ -3,6 +3,9 @@ package at.technikum.tourspring.controller;
 import at.technikum.tourspring.model.Tour;
 import at.technikum.tourspring.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -26,24 +29,25 @@ public class TourRestController {
     }
 
     @PostMapping(path = "/create")
-    public Tour createPlayer(Tour tour) {
+    public Tour createTour(Tour tour) {
         return tourService.createTour(tour);
     }
 
     @DeleteMapping(path = "/delete")
-    public void deletePlayer(Tour tour) {
+    public void deleteTour(Tour tour) {
         tourService.deleteTour(tour);
     }
 
     @DeleteMapping(path = "/delete/{id}")
-    public void deletePlayer(@PathVariable(name = "id") int id) {
+    public ResponseEntity deleteTour(@PathVariable(name = "id") int id) {
         tourService.deleteById(id);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
-    @PutMapping(path = "/update/{tour}")
-    public void updatePlayer(@PathVariable(name = "tour") Tour tour) {
+    @PostMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity updateTourD(@RequestBody Tour tour) {
         tourService.updateById(tour);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
-
 }
