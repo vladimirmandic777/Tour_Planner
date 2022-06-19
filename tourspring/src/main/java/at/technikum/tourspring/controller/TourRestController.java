@@ -40,7 +40,7 @@ public class TourRestController {
 
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity deleteTour(@PathVariable(name = "id") int id) {
-        tourService.deleteById(id);
+        tourService.deleteTour(tourService.findbyId(id).get());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
