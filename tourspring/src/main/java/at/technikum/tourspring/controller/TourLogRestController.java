@@ -1,7 +1,7 @@
 package at.technikum.tourspring.controller;
 
-import at.technikum.tourspring.model.Tour;
-import at.technikum.tourspring.service.TourService;
+import at.technikum.tourspring.model.TourLog;
+import at.technikum.tourspring.service.TourLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,43 +11,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/tour")
-public class TourRestController {
+@RequestMapping("/log")
+public class TourLogRestController {
 
     @Autowired
-    private TourService tourService;
+    private TourLogService tourService;
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Tour> findAll() {
+    public @ResponseBody Iterable<TourLog> findAll() {
         return tourService.findAll();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/{logId}")
     @ResponseBody
-    public Optional<Tour> findById(@PathVariable(name = "id") int id) {
+    public Optional<TourLog> findById(@PathVariable(name = "logId") int id) {
         return tourService.findbyId(id);
     }
 
     @PostMapping(path = "/create")
-    public Tour createTour(Tour tour) {
-        return tourService.createTour(tour);
+    public TourLog createTour(TourLog log) {
+        return tourService.createTourLog(log);
     }
 
     @DeleteMapping(path = "/delete")
-    public void deleteTour(Tour tour) {
-        tourService.deleteTour(tour);
+    public void deleteTour(TourLog log) {
+        tourService.deleteTourLog(log);
     }
 
     @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity deleteTour(@PathVariable(name = "id") int id) {
-        tourService.deleteTour(tourService.findbyId(id).get());
+        tourService.deleteTourLog(tourService.findbyId(id).get());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
     @PostMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity updateTourD(@RequestBody Tour tour) {
-        tourService.updateById(tour);
+    public ResponseEntity updateTourD(@RequestBody TourLog log) {
+        tourService.updateById(log);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }

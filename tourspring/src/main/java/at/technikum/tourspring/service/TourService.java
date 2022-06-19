@@ -31,10 +31,6 @@ public class TourService {
         tourCrudRepository.delete(Tour);
     }
 
-    public void deleteById(int id) {
-        tourCrudRepository.deleteById(id);
-    }
-
     public void updateById(Tour tour) { tourCrudRepository.saveAndFlush(tour);}
 
 }
