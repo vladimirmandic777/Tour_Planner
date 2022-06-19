@@ -1,12 +1,12 @@
 package at.technikum.tour_planner.BAL;
 
-import at.technikum.tour_planner.dal.map.MapTourRepository;
+import at.technikum.tour_planner.dal.map.MapRouteRepository;
 
 public class MapTourServiceImpl implements MapTourService {
 
-    private final MapTourRepository jokeRepository;
+    private final MapRouteRepository jokeRepository;
 
-    public MapTourServiceImpl(MapTourRepository jokeRepository) {
+    public MapTourServiceImpl(MapRouteRepository jokeRepository) {
         this.jokeRepository = jokeRepository;
     }
 

@@ -31,7 +31,6 @@ public class Log4J2Wrapper implements ILoggerWrapper {
     }
 
     public void initialize() {
-        System.out.println("RES:" + TourApplication.class.getResource("log4j2.xml"));
         this.state = new InitializedState(LogManager.getLogger(this.getClass().getName()));
     }
 }

@@ -31,6 +31,7 @@ public class TourListController{
         logger.info("Delete Button clicked");
         DAL.getInstance().tourDao().delete(listView.getSelectionModel().getSelectedItem());
         viewModel.deleteTour(listView.getSelectionModel().getSelectedItem());
+        //viewModel.
     }
 
     public void onButtonAdd(ActionEvent actionEvent) {
