@@ -4,6 +4,8 @@ import lombok.*;
 
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 
 
@@ -46,5 +48,8 @@ public class Tour implements Serializable {
 
     @Column(name = "routeInformation")
     private String routeInformation;
+
+    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<TourLog> logs;
 
 }
