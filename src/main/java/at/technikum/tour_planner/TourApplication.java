@@ -17,7 +17,7 @@ public class TourApplication extends Application {
         launch();
     }
 
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourApplication.class);
 
 
     @Override

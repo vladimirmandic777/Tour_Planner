@@ -15,7 +15,7 @@ import java.util.Map;
 public class MapRouteRepository implements MapRouteRepositoryAPI {
 
     //private MapTourAPI mapTourAPI;
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(MapRouteRepository.class);
     private final Route result;
     private final InputStream resultMap;
     private RouteAPI routeTourAPI;
