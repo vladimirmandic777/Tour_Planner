@@ -28,4 +28,5 @@ module at.technikum.tour_planner {
     exports at.technikum.tour_planner.dal.map to com.fasterxml.jackson.databind;
     opens at.technikum.tour_planner.controllers to javafx.fxml;
     opens at.technikum.tour_planner.dal.map to com.fasterxml.jackson.databind;
+    opens at.technikum.tour_planner.model to javafx.base;
 }

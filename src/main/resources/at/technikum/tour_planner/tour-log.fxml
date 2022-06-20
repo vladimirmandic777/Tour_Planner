@@ -22,14 +22,7 @@
                             <Insets left="10.0" />
                         </HBox.margin></Button>
             </HBox>
-            <TableView VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn prefWidth="75.0" text="Date" />
-                    <TableColumn prefWidth="75.0" text="Duration" />
-                    <TableColumn prefWidth="75.0" text="Distance" />
-                    <TableColumn prefWidth="75.0" text="Difficulty" />
-                    <TableColumn prefWidth="75.0" text="...." />
-                </columns>
+            <TableView fx:id="logTable" VBox.vgrow="ALWAYS">
             </TableView>
 
     </VBox>

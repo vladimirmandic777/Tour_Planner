@@ -2,6 +2,8 @@ package at.technikum.tour_planner.viewModels;
 
 import at.technikum.tour_planner.BAL.MapTourService;
 import at.technikum.tour_planner.dal.DAL;
+import at.technikum.tour_planner.logger.ILoggerWrapper;
+import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -19,17 +21,11 @@ public class TourDetailViewModel {
     private volatile boolean isInitValue = false;
     private TourFx tourFx;
 
-  //  private final MapTourService mapTourService;
+    //  private final MapTourService mapTourService;
 
    // public TourDetailViewModel(MapTourService mapTourService) {
     public TourDetailViewModel() {
        // this.mapTourService = mapTourService;
-        name.addListener((arg, oldVal, newVal) -> updateTourModel());
-        from.addListener((arg, oldVal, newVal) -> updateTourModel());
-        to.addListener((arg, oldVal, newVal) -> updateTourModel());
-        transport.addListener((arg, oldVal, newVal) -> updateTourModel());
-        distance.addListener((arg, oldVal, newVal) -> updateTourModel());
-        duration.addListener((arg, oldVal, newVal) -> updateTourModel());
     }
 
     public void setTourModel(TourFx tourFx) {
@@ -53,7 +49,11 @@ public class TourDetailViewModel {
 
     public void updateTourModel() {
         if (!isInitValue)
-            DAL.getInstance().tourDao().update(tourFx, Arrays.asList(tourFx.getId(), name.get(), "description", from.get(), to.get(), transport.get(), distance.get(), duration.get(), "route info"));
+            DAL.getInstance().tourDao().update
+                    (tourFx, Arrays.asList(tourFx.getId(), name.get(),
+                            "description", from.get(), to.get(), transport.get(),
+                            distance.get(), duration.get(), "route info"));
+       // refreshTour();
     }
 
     public void refreshTour() {

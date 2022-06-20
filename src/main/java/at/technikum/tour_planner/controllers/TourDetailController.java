@@ -6,6 +6,7 @@ import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.viewModels.SearchBarViewModel;
 import at.technikum.tour_planner.viewModels.TourDetailViewModel;
+import at.technikum.tour_planner.viewModels.TourListViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,7 +45,7 @@ public class TourDetailController {
         this.viewModel = viewModel;
     }
 
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourDetailController.class);
 
     @FXML
     void initialize() {
@@ -60,6 +61,7 @@ public class TourDetailController {
     public void onUpdateButton(MouseEvent mouseEvent) {
         try {
             logger.info("Update Button clicked");
+            viewModel.updateTourModel();
             DAL.getInstance().tourDao().update(viewModel.getTourFx());
         } catch (URISyntaxException e) {
             logger.error(e.getMessage());
