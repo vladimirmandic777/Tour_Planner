@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,6 +39,9 @@ public class TourFx implements Serializable {
 
     @JsonProperty(value = "routeInformation")
     private String routeInformation;
+
+    @JsonProperty(value = "logs")
+    private List tour;
 
 
     @Override

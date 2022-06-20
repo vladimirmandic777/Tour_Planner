@@ -27,7 +27,7 @@ public class TourFxDao implements Dao<TourFx>  {
 
     @Override
     public TourFx create() {
-        var tour = new TourFx(getNewID(), "New Tour","","","","",0,0,"");
+        var tour = new TourFx(getNewID(), "New Tour","","","","",0,0,"",null);
         tourItemsList.add(tour);
         return tour;
     }
