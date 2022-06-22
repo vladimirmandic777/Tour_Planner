@@ -4,6 +4,7 @@ import at.technikum.tourspring.repo.TourLogCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,4 +33,7 @@ public class TourLogService {
         logCrudRepository.saveAndFlush(TourLog);
     }
 
+    public List<TourLog> findTourLogsByTourId(int id) {
+        return logCrudRepository.findTourLogsByTourId(id);
+    }
 }

@@ -18,7 +18,6 @@ public class TourListViewModel {
 
     private final StringProperty tourName = new SimpleStringProperty("");
     private List<SelectionChangedListener> listeners = new ArrayList<>();
-    private final TourHttpClient httpClient = new TourHttpClient();
 
     private final ObservableList<TourFx> data = FXCollections.observableArrayList();
 

@@ -15,10 +15,9 @@ public class TourLogDao  implements Dao<TourLog> {
 
     private TourHttpClient httpClient = new TourHttpClient();
 
-    public TourLogDao() {
-        //TODO neue piss methode pls Valdi do it
-      //TODO  tourLogList.addAll(httpClient.getAll());
 
+    public TourLogDao(TourFx tourFx) {
+        tourLogList.addAll(httpClient.getLog(tourFx.getId()));
     }
 
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourFxDao.class);
@@ -36,17 +35,16 @@ public class TourLogDao  implements Dao<TourLog> {
 
     @Override
     public TourLog create() {
-        var tourLog = new TourLog(new Date(), "", 0, new Date(),0);
+        var tourLog = new TourLog(getNewID(),new Date(), "", 0, new Date(), 0);
         tourLogList.add(tourLog);
         return tourLog;
     }
 
-    //TODO Do new ID pls
     private int getNewID() {
         int newId = 1;
         if (!tourLogList.isEmpty()) {
-         //   tourLogList.sort(Comparator.comparing(TourFx::getId).reversed());
-         //   newId = tourLogList.get(0).getId()+1;
+               tourLogList.sort(Comparator.comparing(TourLog::getId).reversed());
+               newId = tourLogList.get(0).getId()+1;
         }
         return newId;
     }
@@ -55,26 +53,28 @@ public class TourLogDao  implements Dao<TourLog> {
     public void update(TourLog tourLog, List<?> params) {
 
         //TODO mach ma schon
-        logger.info(params.toString());
-        tourLog.setDate(Objects.requireNonNull(params.get(1), "Name cannot be null").toString());
-        tourLog.setComment(Objects.requireNonNull(params.get(2), "description cannot be null").toString());
-        tourLog.setDifficulty(Objects.requireNonNull(params.get(3), "setFromDestination cannot be null").toString());
-        tourLog.setTime(Objects.requireNonNull(params.get(5), "transport cannot be null").toString());
+//        logger.info(params.toString());
+//        tourLog.setDate(Objects.requireNonNull(params.get(1), "Name cannot be null").toString());
+//        tourLog.setComment(Objects.requireNonNull(params.get(2), "description cannot be null").toString());
+//        tourLog.setDifficulty(Objects.requireNonNull(params.get(3), "setFromDestination cannot be null").toString());
+//        tourLog.setTime(Objects.requireNonNull(params.get(5), "transport cannot be null").toString());
     }
 
     //TODO mach ma schon
     @Override
     public void update(TourLog tourFx) {
-        try {
-            httpClient.update(tourFx);
-        } catch (URISyntaxException e) {
-            logger.error(e.getMessage());
-        }
+//        try {
+//            httpClient.update(tourFx);
+//        } catch (URISyntaxException e) {
+//            logger.error(e.getMessage());
+//        }
+//    }
+
+
     }
 
-    //TODO mach ma schon 
     @Override
-    public void delete(TourFx tourFx) {
-        httpClient.delete(tourFx);
+    public void delete(TourLog tourLog) {
+
     }
 }

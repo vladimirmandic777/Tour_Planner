@@ -2,6 +2,7 @@ package at.technikum.tour_planner.controllers;
 
 import at.technikum.tour_planner.BAL.PDFReportService;
 import at.technikum.tour_planner.dal.DAL;
+import at.technikum.tour_planner.dal.DALLOG;
 import at.technikum.tour_planner.viewModels.*;
 
 public class ControllerFactory {

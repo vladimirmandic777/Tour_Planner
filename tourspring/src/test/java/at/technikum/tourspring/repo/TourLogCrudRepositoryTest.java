@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,7 +21,7 @@ public class TourLogCrudRepositoryTest {
     @Autowired
     private TourLogCrudRepository logCrudRepository;
 
-    private Tour tour = Tour.builder().id(55).name("Test").description("test").fromDestination("Austria").toDestination("Vienna")
+    private Tour tour = Tour.builder().id(2).name("Test").description("test").fromDestination("Austria").toDestination("Vienna")
             .transport("Car").distance(10).estimatedTime(10).routeInformation("Ja").build();
 
 

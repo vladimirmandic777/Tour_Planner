@@ -4,6 +4,7 @@ import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
+import at.technikum.tour_planner.model.TourLog;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -146,5 +147,36 @@ public class TourHttpClient implements Dao<TourFx> {
         }
 
         return null;
+    }
+
+    public List<TourLog> getLog(int id) {
+        try {
+            // Create a request
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/log/tour/" + id))
+                    .header("User-Agent", "Java 11 HttpClient Bot")
+                    .GET()
+                    .build();
+
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            // Print the status code
+            logger.debug("Status code: " + response.statusCode());
+
+            // Print the response headers
+            response.headers().map().forEach((k, v) -> logger.debug(k + ": " + v));
+
+            // Print the response body
+            logger.debug("Response body:");
+            logger.debug(response.body());
+
+            return objectMapper.readValue(response.body(), new TypeReference<List<TourLog>>() {});
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+
     }
 }

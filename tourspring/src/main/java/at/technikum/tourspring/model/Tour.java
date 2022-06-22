@@ -21,7 +21,7 @@ import javax.persistence.*;
 public class Tour implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private int id;
 
@@ -48,8 +48,8 @@ public class Tour implements Serializable {
 
     @Column(name = "routeInformation")
     private String routeInformation;
-
-    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<TourLog> logs;
+//
+//    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<TourLog> logs;
 
 }
