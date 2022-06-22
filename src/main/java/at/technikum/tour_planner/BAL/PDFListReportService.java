@@ -1,7 +1,9 @@
 package at.technikum.tour_planner.BAL;
 
+import at.technikum.tour_planner.controller.LogHttpClient;
 import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.model.TourFx;
+import at.technikum.tour_planner.model.TourLog;
 import com.itextpdf.io.font.constants.StandardFonts;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -17,11 +19,14 @@ import com.itextpdf.layout.properties.UnitValue;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class PDFListReportService implements ReportService {
     private final Dao<TourFx> mediaItemDao;
     public static final String TARGET_PDF = "src/main/resources/PDF/TourListReport" + LocalDate.now() + ".pdf";
+
+    private LogHttpClient httpClient = new LogHttpClient();
 
 
     public PDFListReportService(Dao<TourFx> mediaItemDao) {
@@ -79,9 +84,16 @@ public class PDFListReportService implements ReportService {
                 //LOG table:
                 document.add(generateTableHeader("Logs for this tour"));
                 Table logTable = setupLogTable();
-                //TODO:ADD data to log table
-                document.add(logTable);
+                List<TourLog> log = httpClient.getLog(tourfx.getId());
 
+                for (TourLog tourLog : log) {
+                    logTable.addCell(String.valueOf(tourLog.getComment()));
+                    logTable.addCell(String.valueOf(tourLog.getDate())); // TODO: date format
+                    logTable.addCell(String.valueOf(tourLog.getDifficulty()));
+                    logTable.addCell(String.valueOf(tourLog.getRating()));
+                    logTable.addCell(String.valueOf(tourLog.getTime())); // TODO: time format
+                }
+                document.add(logTable);
                 document.add(new AreaBreak());
                 ImageData mapImage = ImageDataFactory.create(new URL("file:src/main/resources/images/mapImage" + String.valueOf(tourfx.getId()) + ".jpg"));
                 document.add(new Image(mapImage).setFixedPosition(100,250));
@@ -129,6 +141,6 @@ public class PDFListReportService implements ReportService {
                 .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
                 .setFontSize(26)
                 .setBold()
-                .setFontColor(ColorConstants.BLUE);
+                .setFontColor(ColorConstants.LIGHT_GRAY);
     }
 }
