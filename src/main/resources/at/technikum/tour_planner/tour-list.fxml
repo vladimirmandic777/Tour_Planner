@@ -4,21 +4,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="45.0" prefWidth="307.0" GridPane.rowSpan="2147483647"
-      xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourListController"
-      style="-fx-border-color: grey;">
+<VBox prefHeight="45.0" prefWidth="307.0" style="-fx-border-color: grey;" GridPane.rowSpan="2147483647" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourListController">
 
         <HBox>
             <Label text="Tours" />
-            <Button id="addTour" fx:id="addTour" text="➕" onAction="#onButtonAdd">
+            <Button id="addTour" fx:id="addTour" onAction="#onButtonAdd" text="➕">
                 <HBox.margin>
                     <Insets left="100.0" />
                 </HBox.margin></Button>
             <Button id="deleteTour" fx:id="deleteTour" onAction="#onButtonRemove" text="➖">
-                <HBox.margin>
-                    <Insets left="10.0" />
-                </HBox.margin></Button>
-            <Button text="🛠">
                 <HBox.margin>
                     <Insets left="10.0" />
                 </HBox.margin></Button>

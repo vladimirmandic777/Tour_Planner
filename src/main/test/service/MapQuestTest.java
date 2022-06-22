@@ -5,6 +5,9 @@ import at.technikum.tour_planner.dal.map.*;
 
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import javafx.scene.image.Image;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +19,8 @@ import org.mockito.stubbing.Answer;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,6 +47,8 @@ public class MapQuestTest {
         assertEquals(-77.019913, mapRouteRepository.getBoundingBox().get("ul").get("lng"));
 
         assertNotNull(mapRouteRepository.getSessionId());
+        logger.info("getBoundingBox: " + mapRouteRepository.getBoundingBox());
+
         logger.info("SessionId: " + mapRouteRepository.getSessionId());
 
     }
@@ -50,13 +57,20 @@ public class MapQuestTest {
         assertEquals("225.993", mapRouteRepository.getDistance());
         logger.info("Distance: " + mapRouteRepository.getDistance());
     }
+    @Test
+    void testTime() throws IOException {
+        assertEquals("04:10:20", mapRouteRepository.getTime());
+        logger.info("Time: " + mapRouteRepository.getTime());
+    }
+
 
     @Test
     void testMap() throws IOException {
         MapAPIServiceImpl mapRouteRepository2 = new MapAPIServiceImpl("Vienna", "Bratislava");
+
         assertNotNull(mapRouteRepository2.queryMap());
         logger.info("Map: " + mapRouteRepository2.queryMap().toString());
-        var src = "src/main/resources/images/mapImage" + "7" + ".jpg";
+        var src = "src/main/resources/images/mapImage" + "test" + ".jpg";
         FileOutputStream fos = new FileOutputStream(src);
         try {
             IOUtils.copy(mapRouteRepository2.queryMap(), fos);
@@ -65,5 +79,6 @@ public class MapQuestTest {
             fos.close();
         }
     }
+
 
 }

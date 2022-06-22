@@ -29,7 +29,9 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
         this.routeTourAPI = retrofit.create(RouteAPI.class);
         this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
 
-        Response<ResponseBody> responseMap = this.routeTourAPI.queryMap(from, to).execute();
+        var bb = this.getBoundingBox().get("ul").get("lat") + "," + this.getBoundingBox().get("ul").get("lng") + "," + this.getBoundingBox().get("lr").get("lat") + "," + this.getBoundingBox().get("lr").get("lng");
+        logger.info("BoundingBox parameter: " + bb);
+        Response<ResponseBody> responseMap = this.routeTourAPI.queryMap(from, to, this.getSessionId(), bb).execute();//, this.getBoundingBox()
         this.resultMap = responseMap.body().byteStream();
 
     }

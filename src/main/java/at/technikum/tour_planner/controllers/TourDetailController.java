@@ -54,7 +54,7 @@ public class TourDetailController {
         this.viewModel = viewModel;
     }
 
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourDetailController.class);
 
     @FXML
     void initialize() {
