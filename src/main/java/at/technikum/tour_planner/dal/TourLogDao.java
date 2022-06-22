@@ -8,9 +8,10 @@ import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.model.TourLog;
 
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class TourLogDao  implements DaoLog<TourLog> {
+public class TourLogDao implements DaoLog<TourLog> {
 
     private List<TourLog> tourLogList = new ArrayList<>();
 
@@ -18,11 +19,16 @@ public class TourLogDao  implements DaoLog<TourLog> {
 
 
     public TourLogDao() {
-        // tourLogList.addAll(httpClient.getLog(tourFx.getId()));
+        tourLogList.addAll(getAll());
     }
 
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourFxDao.class);
 
+
+    @Override
+    public List<TourLog> getAll() {
+        return httpClient.getAll();
+    }
 
     @Override
     public List<TourLog> getLog(int id) {
@@ -31,7 +37,7 @@ public class TourLogDao  implements DaoLog<TourLog> {
 
     @Override
     public TourLog create() {
-        var tourLog = new TourLog(getNewID(),new Date(), "", 0, new Date(), 0);
+        var tourLog = new TourLog(getNewID(), new Date(), "", 0, new Date(), 0, 0);
         tourLogList.add(tourLog);
         return tourLog;
     }
@@ -39,35 +45,34 @@ public class TourLogDao  implements DaoLog<TourLog> {
     private int getNewID() {
         int newId = 1;
         if (!tourLogList.isEmpty()) {
-               tourLogList.sort(Comparator.comparing(TourLog::getId).reversed());
-               newId = tourLogList.get(0).getId()+1;
+            tourLogList.sort(Comparator.comparing(TourLog::getId).reversed());
+            newId = tourLogList.get(0).getId() + 1;
         }
         return newId;
     }
 
     @Override
     public void update(TourLog tourLog, List<?> params) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 
-        //TODO mach ma schon
-//        logger.info(params.toString());
-//        tourLog.setDate(Objects.requireNonNull(params.get(1), "Name cannot be null").toString());
-//        tourLog.setComment(Objects.requireNonNull(params.get(2), "description cannot be null").toString());
-//        tourLog.setDifficulty(Objects.requireNonNull(params.get(3), "setFromDestination cannot be null").toString());
-//        tourLog.setTime(Objects.requireNonNull(params.get(5), "transport cannot be null").toString());
+        try {
+            logger.info(params.toString());
+            tourLog.setDate(sdf.parse(Objects.requireNonNull(params.get(1).toString())));
+            tourLog.setComment(Objects.requireNonNull(params.get(2), "description cannot be null").toString());
+            tourLog.setDifficulty(Integer.parseInt(Objects.requireNonNull(params.get(3).toString())));
+            tourLog.setTime(sdf.parse(Objects.requireNonNull(params.get(4).toString())));
+            tourLog.setRating(Integer.parseInt(Objects.requireNonNull(params.get(5).toString())));
+            tourLog.setTourFx(Objects.requireNonNull((TourFx) params.get(6)).getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    //TODO mach ma schon
     @Override
     public void update(TourLog tourFx) {
-//        try {
-//            httpClient.update(tourFx);
-//        } catch (URISyntaxException e) {
-//            logger.error(e.getMessage());
-//        }
-//    }
-
-
+        httpClient.update(tourFx);
     }
+
 
     @Override
     public void delete(TourLog tourLog) {

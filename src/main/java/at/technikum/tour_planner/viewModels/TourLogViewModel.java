@@ -18,7 +18,9 @@ public class TourLogViewModel {
     @Getter
     private ObservableList<TourLog> tourLogs = FXCollections.observableArrayList();
 
+    private TourLog log;
 
+    private TourFx tourFx;
     private final DaoLog<TourLog> mediaItemDao;
 
     private volatile boolean isInitValue = false;
@@ -36,7 +38,8 @@ public class TourLogViewModel {
             tourLogs.clear();
             return;
         }
-
+        this.log = log.get(0);
+        this.tourFx = tourFx;
         tourLogs.addAll(log);
         isInitValue = false;
     }
@@ -55,13 +58,15 @@ public class TourLogViewModel {
         tourLogs.add(log);
     }
 
-    public void updateTourModel() {
+    public void updateLogModel() {
         if (!isInitValue)
-            DAL.getInstance().tourDao().update
-                    (tourFx, Arrays.asList(tourFx.getId(), name.get(),
-                            "description", from.get(), to.get(), transport.get(),
-                            distance.get(), duration.get(), "route info"));
-
-        DALLOG.getInstance().tourLogDao().update(tourLogs, Arrays.asList());
+            DALLOG.getInstance().tourLogDao().update
+                    (log, Arrays.asList(log.getId(), log.getDate(),
+                            log.getComment(), log.getDifficulty(), log.getTime(), log.getRating(), tourFx));
     }
+
+    public TourLog getLog() {
+        return log;
+    }
+
 }

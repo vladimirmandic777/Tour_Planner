@@ -66,9 +66,6 @@ public class TourLogController {
     }
 
     private void editableCols() {
-
-        SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy");
-
         commentCol.setCellFactory(TextFieldTableCell.forTableColumn());
         commentCol.setOnEditCommit(e -> e.getTableView().getItems().get(e.getTablePosition().getRow()).setComment(e.getNewValue()));
 
@@ -103,8 +100,7 @@ public class TourLogController {
         try {
             logger.info("Update Button clicked");
             viewModel.updateLogModel();
-          //  DAL.getInstance().tourDao().update(viewModel.getTourFx());
-           // DALLOG.getInstance().tourLogDao().update(viewModel.getTourLogs());
+            DALLOG.getInstance().tourLogDao().update(viewModel.getLog());
         } catch (URISyntaxException e) {
             logger.error(e.getMessage());
         }

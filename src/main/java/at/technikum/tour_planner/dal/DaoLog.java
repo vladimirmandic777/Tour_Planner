@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface DaoLog<T>  {
 
+    List<T> getAll();
     List<T> getLog(int id);
 
     T create();

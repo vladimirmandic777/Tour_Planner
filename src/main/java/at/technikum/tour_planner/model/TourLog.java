@@ -30,4 +30,7 @@ public class TourLog {
     @JsonProperty(value = "rating")
     private int rating;
 
+    @JsonProperty(value = "idFx")
+    private int tourFx;
+
 }

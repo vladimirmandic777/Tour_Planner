@@ -7,9 +7,6 @@ public class DALLOG {
 
     private DaoLog<TourLog> logDao;
 
-    private static TourFx tourFx;
-
-
     private DALLOG() {
         logDao = new TourLogDao();
     }
@@ -28,6 +25,6 @@ public class DALLOG {
     private static DALLOG instance = new DALLOG();
 
     public static DALLOG getInstance() {
-        return new DALLOG();
+        return instance;
     }
 }

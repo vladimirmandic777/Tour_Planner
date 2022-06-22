@@ -1,6 +1,5 @@
 package at.technikum.tour_planner.viewModels;
 
-import at.technikum.tour_planner.controller.TourHttpClient;
 import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.listener.SelectionChangedListener;
