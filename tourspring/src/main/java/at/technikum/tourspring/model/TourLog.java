@@ -2,6 +2,7 @@ package at.technikum.tourspring.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -42,6 +43,8 @@ public class TourLog implements Serializable {
     @Column(name = "rating")
     private int rating;
 
+    @Column(name = "idFx", nullable=true)
+    private Integer idFx;
 
 }
 

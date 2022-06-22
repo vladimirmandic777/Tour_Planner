@@ -2,6 +2,7 @@ package at.technikum.tourspring.controller;
 
 import at.technikum.tourspring.model.TourLog;
 import at.technikum.tourspring.service.TourLogService;
+import at.technikum.tourspring.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +18,9 @@ public class TourLogRestController {
 
     @Autowired
     private TourLogService logService;
+
+    @Autowired
+    private TourService tourService;
 
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<TourLog> findAll() {
@@ -54,6 +58,7 @@ public class TourLogRestController {
 
     @PostMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updateTourD(@RequestBody TourLog log) {
+        log.setTour(tourService.findbyId(log.getIdFx()).get());
         logService.updateById(log);
         return ResponseEntity.ok(HttpStatus.OK);
     }
