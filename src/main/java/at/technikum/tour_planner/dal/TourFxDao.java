@@ -2,6 +2,8 @@ package at.technikum.tour_planner.dal;
 
 import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
 import at.technikum.tour_planner.controller.TourHttpClient;
+import at.technikum.tour_planner.logger.ILoggerWrapper;
+import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
 
 import java.io.IOException;
@@ -16,6 +18,9 @@ public class TourFxDao implements Dao<TourFx>  {
     public TourFxDao() {
         tourItemsList.addAll(httpClient.getAll());
     }
+
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourFxDao.class);
+
 
     @Override
     public Optional<TourFx> get(int id) {
@@ -36,7 +41,7 @@ public class TourFxDao implements Dao<TourFx>  {
 
     private int getNewID() {
         int newId = 1;
-        if (tourItemsList.size() >=1) {
+        if (!tourItemsList.isEmpty()) {
             tourItemsList.sort(Comparator.comparing(TourFx::getId).reversed());
             newId = tourItemsList.get(0).getId()+1;
         }
@@ -45,7 +50,7 @@ public class TourFxDao implements Dao<TourFx>  {
 
     @Override
     public void update(TourFx tourFx, List<?> params) {
-        System.out.println(params);
+        logger.info(params.toString());
         tourFx.setName(Objects.requireNonNull(params.get(1), "Name cannot be null").toString());
         tourFx.setDescription(Objects.requireNonNull(params.get(2), "description cannot be null").toString());
         tourFx.setFromDestination(Objects.requireNonNull(params.get(3), "setFromDestination cannot be null").toString());
@@ -58,7 +63,11 @@ public class TourFxDao implements Dao<TourFx>  {
 
     @Override
     public void update(TourFx tourFx) throws URISyntaxException, IOException {
-        httpClient.update(tourFx);
+        try {
+            httpClient.update(tourFx);
+        } catch (URISyntaxException e) {
+            logger.error(e.getMessage());
+        }
     }
 
     @Override

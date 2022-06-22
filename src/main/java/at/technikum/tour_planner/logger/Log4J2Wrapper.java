@@ -30,7 +30,7 @@ public class Log4J2Wrapper implements ILoggerWrapper {
         this.state.info(message);
     }
 
-    public void initialize() {
-        this.state = new InitializedState(LogManager.getLogger(this.getClass().getName()));
+    public void initialize(Class <?> clazz) {
+        this.state = new InitializedState(LogManager.getLogger(clazz.getName()));
     }
 }

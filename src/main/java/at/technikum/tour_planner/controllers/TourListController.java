@@ -19,7 +19,7 @@ public class TourListController{
         this.viewModel = viewModel;
     }
 
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourListController.class);
 
     @FXML
     void initialize() {

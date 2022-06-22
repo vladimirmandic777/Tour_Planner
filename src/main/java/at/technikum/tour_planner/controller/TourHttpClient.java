@@ -29,7 +29,7 @@ import java.util.Optional;
 public class TourHttpClient implements Dao<TourFx> {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourHttpClient.class);
 
 
     private HttpClient client = HttpClient.newBuilder()

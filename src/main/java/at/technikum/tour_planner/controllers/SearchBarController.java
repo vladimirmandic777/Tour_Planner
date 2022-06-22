@@ -14,7 +14,7 @@ public class SearchBarController {
     private final SearchBarViewModel viewModel;
 
 
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(SearchBarController.class);
 
     @FXML
     public Button searchButton;

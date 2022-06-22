@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 public class MapQuestTest {
 
     private MapRouteRepository mapRouteRepository = new MapRouteRepository("New+York,NY", "Washington,DC");
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger();
+    private static final ILoggerWrapper logger = LoggerFactory.getLogger(MapQuestTest.class);
 
     public MapQuestTest() throws IOException {
     }
