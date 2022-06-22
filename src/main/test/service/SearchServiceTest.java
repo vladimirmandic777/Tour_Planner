@@ -32,7 +32,7 @@ public class SearchServiceTest {
 
     @Test
     void testFindMatchingTours() {
-        when(tourFxDao.getAll()).thenReturn(List.of(new TourFx(1,"Aa", "test", "austria", "Vienna","car", 10,10,"ja", null)));
+        when(tourFxDao.getAll()).thenReturn(List.of(new TourFx(1,"Aa", "test", "austria", "Vienna","car", 10,"10","ja", null)));
 
         final var foundItems = instance.findMatchingTours("Aa");
 

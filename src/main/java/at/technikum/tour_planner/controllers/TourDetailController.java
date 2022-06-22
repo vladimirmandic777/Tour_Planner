@@ -7,10 +7,15 @@ import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.viewModels.TourDetailViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class TourDetailController {
@@ -27,11 +32,16 @@ public class TourDetailController {
     @FXML
     public TextField tourTransport;
     @FXML
-    public TextField tourDistance;
+    public Label tourDistance;
     @FXML
-    public TextField tourDuration;
+    public Label tourDuration;
     @FXML
     public Button updateButton;
+    @FXML
+    public ImageView mapImageView;
+    @FXML
+    public TextArea description;
+
 
     private TourFx tourFx;
 
@@ -50,16 +60,31 @@ public class TourDetailController {
         tourTransport.textProperty().bindBidirectional(viewModel.transportProperty());
         tourDistance.textProperty().bindBidirectional(viewModel.distanceProperty());
         tourDuration.textProperty().bindBidirectional(viewModel.durationProperty());
+        description.textProperty().bindBidirectional(viewModel.descriptionProperty());
+        mapImageView.imageProperty().bindBidirectional(viewModel.mapURLProperty());
+        // load the image
+        //if(viewModel.getTourFx() != null) {
+            /*var src = String.valueOf(viewModel.mapURLProperty());
+            System.out.println("src: " + src);
+            Image image = new Image(src);
+            mapImageView.setImage(image);*/
+        //}
+
     }
 
-    public void onUpdateButton(MouseEvent mouseEvent) {
+    public void onUpdateButton(MouseEvent mouseEvent) throws URISyntaxException {
+
         try {
             logger.info("Update Button clicked");
             viewModel.updateTourModel();
             DAL.getInstance().tourDao().update(viewModel.getTourFx());
+            viewModel.setTourModel(viewModel.getTourFx());
         } catch (URISyntaxException e) {
             logger.error(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        viewModel.refreshTour();
     }
 
     public void changeTitle(KeyEvent keyEvent) {

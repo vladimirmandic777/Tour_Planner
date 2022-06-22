@@ -2,10 +2,10 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="at.technikum.tour_planner.controllers.TourDetailController" prefHeight="400">
+<VBox prefHeight="400" style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourDetailController">
 
     <HBox>
         <Label alignment="CENTER" onKeyPressed="#changeTitle" prefHeight="25.0" prefWidth="73.0" text="Title:" />
@@ -30,9 +30,6 @@
                         </padding></Label>
                                 <TextField fx:id="tourName" text="" HBox.hgrow="ALWAYS" />
                             </HBox>
-                            <padding>
-                                <Insets top="10" />
-                            </padding>
                             <HBox>
                                 <Label prefWidth="70" text="From">
                         <padding>
@@ -59,22 +56,29 @@
                         <padding>
                            <Insets right="10.0" />
                         </padding></Label>
-                                <TextField fx:id="tourDistance" text="" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="tourDistance" prefHeight="17.0" prefWidth="147.0" text="" />
                             </HBox>
                             <HBox>
                                 <Label prefWidth="70" text="Duration">
                         <padding>
                            <Insets right="10.0" />
                         </padding></Label>
-                                <TextField fx:id="tourDuration" text="" HBox.hgrow="ALWAYS" />
+                                <Label fx:id="tourDuration" prefHeight="17.0" prefWidth="147.0" text="Duration" />
                             </HBox>
                   <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onUpdateButton" text="Update" textAlignment="CENTER" />
+                            <padding>
+                                <Insets top="10" />
+                            </padding>
                         </VBox>
                         </ScrollPane>
                     </Tab>
 
                     <Tab fx:id="descriptionTab" text="Description">
-                        <TextArea />
+                        <TextArea fx:id="description" />
+                    </Tab>
+                    <Tab fx:id="mapTab" text="Map">
+                        <ImageView fx:id="mapImageView" fitHeight="220.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" />
+
                     </Tab>
                 </tabs>
             </TabPane>

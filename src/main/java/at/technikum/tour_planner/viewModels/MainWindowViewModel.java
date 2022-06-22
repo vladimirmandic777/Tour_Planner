@@ -33,5 +33,6 @@ public class MainWindowViewModel {
     private void selectTour(TourFx tourFx) {
         tourDetailViewModel.setTourModel(tourFx);
         tourLogViewModel.setTourModel(tourFx);
+        navigationBarViewModel.setTourModel(tourFx);
     }
 }

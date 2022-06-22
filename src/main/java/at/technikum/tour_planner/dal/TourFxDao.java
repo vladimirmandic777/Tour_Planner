@@ -1,10 +1,12 @@
 package at.technikum.tour_planner.dal;
 
+import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
 import at.technikum.tour_planner.controller.TourHttpClient;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 
@@ -32,7 +34,7 @@ public class TourFxDao implements Dao<TourFx>  {
 
     @Override
     public TourFx create() {
-        var tour = new TourFx(getNewID(), "New Tour","","","","",0,0,"",null);
+        var tour = new TourFx(getNewID(), "New Tour","","","","",0,"0","",null);
         tourItemsList.add(tour);
         return tour;
     }
@@ -55,12 +57,12 @@ public class TourFxDao implements Dao<TourFx>  {
         tourFx.setToDestination(Objects.requireNonNull(params.get(4), "toDestination cannot be null").toString());
         tourFx.setTransport(Objects.requireNonNull(params.get(5), "transport cannot be null").toString());
         tourFx.setDistance(Integer.parseInt(params.get(6).toString()));
-        tourFx.setEstimatedTime(Integer.parseInt(params.get(7).toString()));
+        tourFx.setEstimatedTime(params.get(7).toString());
         tourFx.setRouteInformation(Objects.requireNonNull(params.get(8), "transport cannot be null").toString());
     }
 
     @Override
-    public void update(TourFx tourFx) {
+    public void update(TourFx tourFx) throws URISyntaxException, IOException {
         try {
             httpClient.update(tourFx);
         } catch (URISyntaxException e) {

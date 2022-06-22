@@ -35,7 +35,7 @@ public class TourFx implements Serializable {
     private int distance;
 
     @JsonProperty(value = "estimatedTime")
-    private int estimatedTime;
+    private String estimatedTime;
 
     @JsonProperty(value = "routeInformation")
     private String routeInformation;

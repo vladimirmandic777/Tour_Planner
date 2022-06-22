@@ -22,6 +22,7 @@ public class TourApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        logger.info("Starting application");
         Parent root = FXMLDependencyInjection.load("MainWindow.fxml", Locale.GERMAN);
 
         Scene scene = new Scene(root, 800, 600);

@@ -44,7 +44,7 @@ public class Tour implements Serializable {
     private int distance;
 
     @Column(name = "estimatedTime")
-    private int estimatedTime;
+    private String estimatedTime;
 
     @Column(name = "routeInformation")
     private String routeInformation;

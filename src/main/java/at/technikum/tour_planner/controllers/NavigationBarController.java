@@ -18,4 +18,8 @@ public class NavigationBarController {
     public void onGenerateReportClicked(ActionEvent actionEvent) {
         viewModel.generateReport();
     }
+    public void onGenerateTourReportClicked(ActionEvent actionEvent) {
+        viewModel.generateTourReport();
+    }
+
 }
