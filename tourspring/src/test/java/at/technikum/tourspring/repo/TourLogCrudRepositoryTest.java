@@ -22,7 +22,7 @@ public class TourLogCrudRepositoryTest {
     private TourLogCrudRepository logCrudRepository;
 
     private Tour tour = Tour.builder().id(2).name("Test").description("test").fromDestination("Austria").toDestination("Vienna")
-            .transport("Car").distance(10).estimatedTime(10).routeInformation("Ja").build();
+            .transport("Car").distance(10).estimatedTime("10").routeInformation("Ja").build();
 
 
     @BeforeAll

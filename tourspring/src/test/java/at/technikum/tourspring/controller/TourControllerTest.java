@@ -78,7 +78,7 @@ public class TourControllerTest {
     @Test
     public void createTourTest() {
         try {
-            Tour tour = Tour.builder().id(1).name("Test").description("test").fromDestination("Austria").toDestination("Vienna").transport("Car").distance(10).estimatedTime(10).routeInformation("Ja").build();
+            Tour tour = Tour.builder().id(1).name("Test").description("test").fromDestination("Austria").toDestination("Vienna").transport("Car").distance(10).estimatedTime("new").routeInformation("Ja").build();
 
             tourService.createTour(tour);
 

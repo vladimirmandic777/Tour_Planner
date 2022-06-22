@@ -71,12 +71,8 @@ public class MapQuestTest {
         assertNotNull(mapRouteRepository2.queryMap());
         logger.info("Map: " + mapRouteRepository2.queryMap().toString());
         var src = "src/main/resources/images/mapImage" + "test" + ".jpg";
-        FileOutputStream fos = new FileOutputStream(src);
-        try {
+        try (FileOutputStream fos = new FileOutputStream(src)) {
             IOUtils.copy(mapRouteRepository2.queryMap(), fos);
-        }
-        finally {
-            fos.close();
         }
     }
 
