@@ -1,8 +1,6 @@
 package at.technikum.tour_planner.viewModels;
 
-import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.dal.DALLOG;
-import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.dal.DaoLog;
 import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.model.TourLog;
@@ -35,10 +33,11 @@ public class TourLogViewModel {
         List<TourLog> log = DALLOG.getInstance().tourLogDao().getLog(tourFx.getId());
 
         if (log.isEmpty()) {
+            this.tourFx = tourFx;
             tourLogs.clear();
             return;
         }
-        this.log = log.get(0);
+        //this.log = log.get(0);
         this.tourFx = tourFx;
         tourLogs.addAll(log);
         isInitValue = false;
@@ -58,11 +57,10 @@ public class TourLogViewModel {
         tourLogs.add(log);
     }
 
-    public void updateLogModel() {
-        if (!isInitValue)
+    public void updateLogModel(TourLog tourLog) {
             DALLOG.getInstance().tourLogDao().update
-                    (log, Arrays.asList(log.getId(), log.getDate(),
-                            log.getComment(), log.getDifficulty(), log.getTime(), log.getRating(), tourFx));
+                    (tourLog, Arrays.asList(tourLog.getId(), tourLog.getDate(),
+                            tourLog.getComment(), tourLog.getDifficulty(), tourLog.getTime(), tourLog.getRating(), tourFx));
     }
 
     public TourLog getLog() {

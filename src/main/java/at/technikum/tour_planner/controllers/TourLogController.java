@@ -9,6 +9,7 @@ import at.technikum.tour_planner.viewModels.TourListViewModel;
 import at.technikum.tour_planner.viewModels.TourLogViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,7 +23,9 @@ import retrofit2.http.FieldMap;
 import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
 
 public class TourLogController {
 
@@ -99,8 +102,8 @@ public class TourLogController {
     public void onUpdateButton(MouseEvent mouseEvent) {
         try {
             logger.info("Update Button clicked");
-            viewModel.updateLogModel();
-            DALLOG.getInstance().tourLogDao().update(viewModel.getLog());
+            viewModel.updateLogModel(logTable.getSelectionModel().getSelectedItem());
+            DALLOG.getInstance().tourLogDao().update(logTable.getSelectionModel().getSelectedItem());
         } catch (URISyntaxException e) {
             logger.error(e.getMessage());
         }
