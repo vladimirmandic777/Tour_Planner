@@ -1,4 +1,5 @@
 package service;
+import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
 import at.technikum.tour_planner.dal.map.*;
 
 
@@ -52,13 +53,13 @@ public class MapQuestTest {
 
     @Test
     void testMap() throws IOException {
-        MapRouteRepository mapRouteRepository2 = new MapRouteRepository("Vienna", "Bratislava");
-        assertNotNull(mapRouteRepository2.getMap());
-        logger.info("Map: " + mapRouteRepository2.getMap().toString());
-        FileOutputStream fos = new FileOutputStream("image2.jpg");
+        MapAPIServiceImpl mapRouteRepository2 = new MapAPIServiceImpl("Vienna", "Bratislava");
+        assertNotNull(mapRouteRepository2.queryMap());
+        logger.info("Map: " + mapRouteRepository2.queryMap().toString());
+        var src = "src/main/resources/images/mapImage" + "7" + ".jpg";
+        FileOutputStream fos = new FileOutputStream(src);
         try {
-            IOUtils.copy(mapRouteRepository2.getMap(), fos);
-
+            IOUtils.copy(mapRouteRepository2.queryMap(), fos);
         }
         finally {
             fos.close();

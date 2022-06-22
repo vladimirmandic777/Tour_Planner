@@ -1,5 +1,6 @@
 package at.technikum.tour_planner.controller;
 
+import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
 import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
@@ -7,7 +8,11 @@ import at.technikum.tour_planner.model.TourFx;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -75,7 +80,23 @@ public class TourHttpClient implements Dao<TourFx> {
     }
 
     @Override
-    public void update(TourFx tourFx) throws URISyntaxException {
+    public void update(TourFx tourFx) throws URISyntaxException, IOException {
+        //MapAPIServiceImpl mapAPIService = new MapAPIServiceImpl("New+York,NY", "Washington,DC");
+        MapAPIServiceImpl mapAPIService = new MapAPIServiceImpl(tourFx.getFromDestination(), tourFx.getToDestination());
+
+        //get data from mapAPI
+        tourFx.setDistance((int) Double.parseDouble(mapAPIService.queryDistance()));
+        tourFx.setEstimatedTime(mapAPIService.queryTime());
+        var src = "src/main/resources/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
+
+        FileOutputStream fos = new FileOutputStream(src);
+        try {
+            IOUtils.copy(mapAPIService.queryMap(), fos);
+        }
+        finally {
+            fos.close();
+        }
+
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody;
         try {
