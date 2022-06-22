@@ -9,15 +9,15 @@
 
             <HBox>
                     <Label text="Logs:" />
-                    <Button text="➕" GridPane.columnIndex="2">
+                    <Button text="➕" GridPane.columnIndex="2" onAction="#onButtonAdd">
                         <HBox.margin>
                             <Insets left="100.0" />
                         </HBox.margin></Button>
-                    <Button text="➖">
+                    <Button id="deleteTourLog" fx:id="deleteTourLog" onAction="#onButtonRemove" text="➖" >
                         <HBox.margin>
                             <Insets left="10.0" />
                         </HBox.margin></Button>
-                    <Button text="🛠">
+                    <Button text="🛠" onMouseClicked="#onUpdateButton">
                         <HBox.margin>
                             <Insets left="10.0" />
                         </HBox.margin></Button>

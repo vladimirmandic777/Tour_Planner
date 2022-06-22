@@ -1,5 +1,6 @@
 package at.technikum.tour_planner.dal;
 
+import at.technikum.tour_planner.controller.LogHttpClient;
 import at.technikum.tour_planner.controller.TourHttpClient;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
@@ -9,28 +10,23 @@ import at.technikum.tour_planner.model.TourLog;
 import java.net.URISyntaxException;
 import java.util.*;
 
-public class TourLogDao  implements Dao<TourLog> {
+public class TourLogDao  implements DaoLog<TourLog> {
 
     private List<TourLog> tourLogList = new ArrayList<>();
 
-    private TourHttpClient httpClient = new TourHttpClient();
+    private LogHttpClient httpClient = new LogHttpClient();
 
 
-    public TourLogDao(TourFx tourFx) {
-        tourLogList.addAll(httpClient.getLog(tourFx.getId()));
+    public TourLogDao() {
+        // tourLogList.addAll(httpClient.getLog(tourFx.getId()));
     }
 
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourFxDao.class);
 
 
     @Override
-    public Optional<TourLog> get(int id) {
-        return Optional.ofNullable(tourLogList.get(id));
-    }
-
-    @Override
-    public List<TourLog> getAll() {
-        return tourLogList;
+    public List<TourLog> getLog(int id) {
+        return httpClient.getLog(id);
     }
 
     @Override
@@ -75,6 +71,6 @@ public class TourLogDao  implements Dao<TourLog> {
 
     @Override
     public void delete(TourLog tourLog) {
-
+        httpClient.delete(tourLog);
     }
 }

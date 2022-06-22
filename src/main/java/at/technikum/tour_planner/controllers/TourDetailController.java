@@ -4,12 +4,7 @@ import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
-import at.technikum.tour_planner.viewModels.SearchBarViewModel;
 import at.technikum.tour_planner.viewModels.TourDetailViewModel;
-import at.technikum.tour_planner.viewModels.TourListViewModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,7 +12,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URISyntaxException;
-import java.util.Arrays;
 
 public class TourDetailController {
     private final TourDetailViewModel viewModel;

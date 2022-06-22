@@ -5,19 +5,19 @@ import at.technikum.tour_planner.model.TourLog;
 
 public class DALLOG {
 
-    private Dao<TourLog> logDao;
+    private DaoLog<TourLog> logDao;
 
     private static TourFx tourFx;
 
 
-    private DALLOG(TourFx tourFx) {
-        logDao = new TourLogDao(tourFx);
+    private DALLOG() {
+        logDao = new TourLogDao();
     }
 
     //
     // Logs
     //
-    public Dao<TourLog> tourLogDao() {
+    public DaoLog<TourLog> tourLogDao() {
         return logDao;
     }
 
@@ -25,9 +25,9 @@ public class DALLOG {
     //
     // Singleton-Pattern for DALLOG with early-binding
     //
-    private static DALLOG instance = new DALLOG(tourFx);
+    private static DALLOG instance = new DALLOG();
 
-    public static DALLOG getInstance(TourFx tourFx) {
-        return new DALLOG(tourFx);
+    public static DALLOG getInstance() {
+        return new DALLOG();
     }
 }

@@ -20,7 +20,7 @@ public class ControllerFactory {
         tourDetailViewModel = new TourDetailViewModel();
      //   tourDetailViewModel = new TourDetailViewModel(new MapTourServiceImpl(new MapTourRepository()));
         searchBarViewModel = new SearchBarViewModel();
-        tourLogViewModel = new TourLogViewModel();
+        tourLogViewModel = new TourLogViewModel(DALLOG.getInstance().tourLogDao());
 
         mainWindowViewModel = new MainWindowViewModel(navigationBarViewModel, searchBarViewModel, tourListViewModel, tourDetailViewModel, tourLogViewModel);
     }
