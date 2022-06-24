@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -82,13 +83,32 @@ public class TourHttpClient implements Dao<TourFx> {
 
     @Override
     public void update(TourFx tourFx) throws URISyntaxException, IOException {
-        //MapAPIServiceImpl mapAPIService = new MapAPIServiceImpl("New+York,NY", "Washington,DC");
         MapAPIServiceImpl mapAPIService = new MapAPIServiceImpl(tourFx.getFromDestination(), tourFx.getToDestination());
 
         //get data from mapAPI
         tourFx.setDistance((int) Double.parseDouble(mapAPIService.queryDistance()));
         tourFx.setEstimatedTime(mapAPIService.queryTime());
-        var src = "src/main/resources/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
+        String imgDirPATH = "target/res/images";
+        String logDirPATH = "target/res/logs";
+        String pdfDirPATH = "target/res/PDF";
+
+        File directoryImg = new File(imgDirPATH);
+        if (! directoryImg.exists()){
+            directoryImg.mkdirs();
+        }
+        File directoryLog = new File(logDirPATH);
+
+        if(! directoryLog.exists()){
+            directoryLog.mkdirs();
+        }
+        File directoryPdf = new File(pdfDirPATH);
+
+        if(! directoryPdf.exists()){
+            directoryPdf.mkdirs();
+        }
+
+
+        var src = "target/res/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
 
         FileOutputStream fos = new FileOutputStream(src);
         try {

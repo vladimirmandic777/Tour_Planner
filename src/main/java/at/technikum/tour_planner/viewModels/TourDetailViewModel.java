@@ -55,7 +55,7 @@ public class TourDetailViewModel {
         distance.setValue(String.valueOf(tourFx.getDistance()));
         duration.setValue(String.valueOf(tourFx.getEstimatedTime()));
         description.setValue(tourFx.getDescription());
-        var src = "file:src/main/resources/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
+        var src = "file:target/res/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
         Image image = new Image(src);
         mapURL.setValue(image);
         isInitValue = false;

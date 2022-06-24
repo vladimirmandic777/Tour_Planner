@@ -24,7 +24,7 @@ import java.util.List;
 
 public class PDFListReportService implements ReportService {
     private final Dao<TourFx> mediaItemDao;
-    public static final String TARGET_PDF = "src/main/resources/PDF/TourListReport" + LocalDate.now() + ".pdf";
+    public static final String TARGET_PDF = "target/res/PDF/";
 
     private LogHttpClient httpClient = new LogHttpClient();
 
@@ -37,7 +37,7 @@ public class PDFListReportService implements ReportService {
     public void generateReport() {
         final var mediaItemList = this.mediaItemDao.getAll();
         try {
-            PdfWriter writer = new PdfWriter(TARGET_PDF);
+            PdfWriter writer = new PdfWriter(TARGET_PDF + "TourListReport" + LocalDate.now() + ".pdf");
             PdfDocument pdf = new PdfDocument(writer);
             try (Document document = new Document(pdf)) {
                 ImageData imageData = ImageDataFactory.create(new URL("https://www.technikum-wien.at/sites/default/files/logo-300x160.png"));
@@ -63,7 +63,7 @@ public class PDFListReportService implements ReportService {
     @Override
     public void generateTourReport(TourFx tourfx){
         try {
-            PdfWriter writer = new PdfWriter("src/main/resources/PDF/TourReport-"+tourfx.getName() + "-" + LocalDate.now() + ".pdf");
+            PdfWriter writer = new PdfWriter(TARGET_PDF + "TourReport-"+tourfx.getName() + "-" + LocalDate.now() + ".pdf");
             PdfDocument pdf = new PdfDocument(writer);
             try (Document document = new Document(pdf)) {
                 ImageData imageData = ImageDataFactory.create(new URL("https://www.technikum-wien.at/sites/default/files/logo-300x160.png"));
@@ -95,7 +95,7 @@ public class PDFListReportService implements ReportService {
                 }
                 document.add(logTable);
                 document.add(new AreaBreak());
-                ImageData mapImage = ImageDataFactory.create(new URL("file:src/main/resources/images/mapImage" + String.valueOf(tourfx.getId()) + ".jpg"));
+                ImageData mapImage = ImageDataFactory.create(new URL("file:target/res/images/mapImage" + String.valueOf(tourfx.getId()) + ".jpg"));
                 document.add(new Image(mapImage).setFixedPosition(100,250));
             }
         }  catch (IOException e) {

@@ -16,9 +16,11 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
 
     //private MapTourAPI mapTourAPI;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(MapRouteRepository.class);
-    private final Route result;
-    private final InputStream resultMap;
+    private Route result;
+    private InputStream resultMap;
     private RouteAPI routeTourAPI;
+    private final String from;
+    private final String to;
 
 
     public MapRouteRepository(String from, String to) throws IOException {
@@ -27,35 +29,52 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
         this.routeTourAPI = retrofit.create(RouteAPI.class);
-        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
+        this.from = from;
+        this.to = to;
+        //split in every method next code:
+        //this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
 
-        var bb = this.getBoundingBox().get("ul").get("lat") + "," + this.getBoundingBox().get("ul").get("lng") + "," + this.getBoundingBox().get("lr").get("lat") + "," + this.getBoundingBox().get("lr").get("lng");
-        logger.info("BoundingBox parameter: " + bb);
-        Response<ResponseBody> responseMap = this.routeTourAPI.queryMap(from, to, this.getSessionId(), bb).execute();//, this.getBoundingBox()
-        this.resultMap = responseMap.body().byteStream();
+
 
     }
-
-
     @Override
     public Map<String, Map<String, Double>> getBoundingBox() throws IOException {
+        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
         return result.getRoute().getBoundingBox();
     }
     @Override
     public String getDistance() throws IOException {
+        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
         return result.getRoute().getDistance();
     }
     @Override
     public String getTime() throws IOException {
+        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
         return result.getRoute().getFormattedTime();
     }
     @Override
     public String getSessionId() throws IOException {
+        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
         return result.getRoute().getSessionId();
     }
 
     @Override
     public InputStream getMap() {
+
+        String bb = null;
+        try {
+            bb = this.getBoundingBox().get("ul").get("lat") + "," + this.getBoundingBox().get("ul").get("lng") + "," + this.getBoundingBox().get("lr").get("lat") + "," + this.getBoundingBox().get("lr").get("lng");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        logger.info("BoundingBox parameter: " + bb);
+        Response<ResponseBody> responseMap = null;//, this.getBoundingBox()
+        try {
+            responseMap = this.routeTourAPI.queryMap(from, to, this.getSessionId(), bb).execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        this.resultMap = responseMap.body().byteStream();
         return this.resultMap;
     }
 

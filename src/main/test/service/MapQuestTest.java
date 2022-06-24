@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 
 public class MapQuestTest {
 
-    private MapRouteRepository mapRouteRepository = new MapRouteRepository("New+York,NY", "Washington,DC");
+    //private MapRouteRepository mapRouteRepository = new MapRouteRepository("New+York,NY", "Washington,DC");
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(MapQuestTest.class);
 
     public MapQuestTest() throws IOException {
@@ -38,7 +38,7 @@ public class MapQuestTest {
 
     @Test
      void testBoundingBox() throws IOException {
-
+        MapRouteRepository mapRouteRepository = new MapRouteRepository("New+York,NY", "Washington,DC");
         assertNotNull(mapRouteRepository.getBoundingBox());
         assertEquals(38.892063, mapRouteRepository.getBoundingBox().get("lr").get("lat"));
         assertEquals(-74.004807, mapRouteRepository.getBoundingBox().get("lr").get("lng"));
@@ -54,12 +54,14 @@ public class MapQuestTest {
     }
     @Test
     void testDistance() throws IOException {
-        assertEquals("225.993", mapRouteRepository.getDistance());
+        MapRouteRepository mapRouteRepository = new MapRouteRepository("Berlin", "Hamburg");
+        assertEquals("180.006", mapRouteRepository.getDistance());
         logger.info("Distance: " + mapRouteRepository.getDistance());
     }
     @Test
     void testTime() throws IOException {
-        assertEquals("04:10:20", mapRouteRepository.getTime());
+        MapRouteRepository mapRouteRepository = new MapRouteRepository("Dubrovnik", "Zadar");
+        assertEquals("03:55:59", mapRouteRepository.getTime());
         logger.info("Time: " + mapRouteRepository.getTime());
     }
 
@@ -70,7 +72,7 @@ public class MapQuestTest {
 
         assertNotNull(mapRouteRepository2.queryMap());
         logger.info("Map: " + mapRouteRepository2.queryMap().toString());
-        var src = "src/main/resources/images/mapImage" + "test" + ".jpg";
+        var src = "target/res/images/mapImage" + "test" + ".jpg";
         try (FileOutputStream fos = new FileOutputStream(src)) {
             IOUtils.copy(mapRouteRepository2.queryMap(), fos);
         }
