@@ -1,5 +1,5 @@
 package at.technikum.tour_planner.dal;
-import at.technikum.tour_planner.controller.TourHttpClient;
+import at.technikum.tour_planner.httpClient.TourHttpClient;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;

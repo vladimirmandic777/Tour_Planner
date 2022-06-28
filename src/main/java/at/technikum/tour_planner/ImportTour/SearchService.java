@@ -1,4 +1,4 @@
-package at.technikum.tour_planner.BAL;
+package at.technikum.tour_planner.ImportTour;
 
 import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.dal.Dao;

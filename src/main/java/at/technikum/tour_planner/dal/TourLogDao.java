@@ -1,13 +1,11 @@
 package at.technikum.tour_planner.dal;
 
-import at.technikum.tour_planner.controller.LogHttpClient;
-import at.technikum.tour_planner.controller.TourHttpClient;
+import at.technikum.tour_planner.httpClient.LogHttpClient;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.model.TourLog;
 
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 

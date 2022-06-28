@@ -1,7 +1,7 @@
 package at.technikum.tour_planner.viewModels;
 
 import at.technikum.tour_planner.model.TourFx;
-import at.technikum.tour_planner.BAL.SearchService;
+import at.technikum.tour_planner.ImportTour.SearchService;
 
 public class MainWindowViewModel {
     private NavigationBarViewModel navigationBarViewModel;

@@ -1,31 +1,18 @@
 package service;
-import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
+import at.technikum.tour_planner.ImportTour.MapAPIServiceImpl;
 import at.technikum.tour_planner.dal.map.*;
 
 
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
-import com.itextpdf.io.image.ImageData;
-import com.itextpdf.io.image.ImageDataFactory;
-import javafx.scene.image.Image;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
 
 public class MapQuestTest {
 

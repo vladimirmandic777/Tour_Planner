@@ -2,14 +2,12 @@ package service;
 
 import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.model.TourFx;
-import at.technikum.tour_planner.BAL.SearchService;
+import at.technikum.tour_planner.ImportTour.SearchService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import java.util.List;
 

@@ -1,10 +1,8 @@
-package at.technikum.tour_planner.controller;
+package at.technikum.tour_planner.httpClient;
 
-import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.dal.DaoLog;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
-import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.model.TourLog;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

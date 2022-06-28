@@ -1,6 +1,5 @@
 package at.technikum.tour_planner.viewModels;
 
-import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
 import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.model.TourFx;
 import javafx.beans.property.ObjectProperty;

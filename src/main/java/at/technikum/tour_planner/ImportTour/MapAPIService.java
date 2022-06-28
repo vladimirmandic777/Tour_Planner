@@ -1,4 +1,4 @@
-package at.technikum.tour_planner.BAL;
+package at.technikum.tour_planner.ImportTour;
 
 import java.io.InputStream;
 

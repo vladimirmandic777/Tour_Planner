@@ -1,6 +1,6 @@
-package at.technikum.tour_planner.BAL;
+package at.technikum.tour_planner.ImportTour;
 
-import at.technikum.tour_planner.controller.LogHttpClient;
+import at.technikum.tour_planner.httpClient.LogHttpClient;
 import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.model.TourLog;
@@ -12,7 +12,6 @@ import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.ElementPropertyContainer;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.UnitValue;
 

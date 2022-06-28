@@ -21,6 +21,7 @@ module at.technikum.tour_planner {
     requires retrofit2.converter.jackson;
     requires okhttp3;
     requires org.apache.tomcat.embed.core;
+    requires opencsv;
 
     opens at.technikum.tour_planner to javafx.fxml;
     exports at.technikum.tour_planner;

@@ -1,11 +1,10 @@
-package at.technikum.tour_planner.controller;
+package at.technikum.tour_planner.httpClient;
 
-import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
+import at.technikum.tour_planner.ImportTour.MapAPIServiceImpl;
 import at.technikum.tour_planner.dal.Dao;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
-import at.technikum.tour_planner.model.TourLog;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +12,6 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;

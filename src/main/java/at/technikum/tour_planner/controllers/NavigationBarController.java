@@ -22,4 +22,7 @@ public class NavigationBarController {
         viewModel.generateTourReport();
     }
 
+    public void onExportTour(ActionEvent actionEvent) {
+        viewModel.generateExport();
+    }
 }
