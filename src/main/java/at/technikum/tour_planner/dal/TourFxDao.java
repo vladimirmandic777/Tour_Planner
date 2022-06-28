@@ -1,6 +1,4 @@
 package at.technikum.tour_planner.dal;
-
-import at.technikum.tour_planner.BAL.MapAPIServiceImpl;
 import at.technikum.tour_planner.controller.TourHttpClient;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
