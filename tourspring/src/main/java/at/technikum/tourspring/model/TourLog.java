@@ -2,7 +2,7 @@ package at.technikum.tourspring.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.lang.Nullable;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +26,7 @@ public class TourLog implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tour_id", nullable = false)
     @JsonIgnore
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Tour tour;
 
     @Column(name = "date")
@@ -38,7 +39,7 @@ public class TourLog implements Serializable {
     private int difficulty;
 
     @Column(name = "time")
-    private Date time; // oder eher als String?
+    private Date time;
 
     @Column(name = "rating")
     private int rating;
@@ -47,10 +48,3 @@ public class TourLog implements Serializable {
     private Integer idFx;
 
 }
-
-
-/*
-popularity (derived from number of logs)
-o child-friendliness (derived from recorded difficulty values, total times and distance)
-
- */

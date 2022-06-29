@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 public class TourHttpClient implements Dao<TourFx> {
 
     private static ObjectMapper objectMapper = new ObjectMapper();
@@ -39,6 +38,7 @@ public class TourHttpClient implements Dao<TourFx> {
 
     @Override
     public Optional<TourFx> get(int id) {
+        logger.info("Get Tour with id: " + id);
         try {
             // Create a request
             HttpRequest request = getHttpRequest(Integer.toString(id));
@@ -49,12 +49,14 @@ public class TourHttpClient implements Dao<TourFx> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        logger.error("Could not find Tour with id: " + id);
         return Optional.empty();
     }
 
 
     @Override
     public List<TourFx> getAll() {
+        logger.info("Get all Tours");
         try {
             // Create a request
             HttpRequest request = getHttpRequest("all");
@@ -62,10 +64,12 @@ public class TourHttpClient implements Dao<TourFx> {
             // Execute the request
             HttpResponse<String> response = getHttpResponse(request);
 
-            return objectMapper.readValue(response.body(), new TypeReference<List<TourFx>>() {});
+            return objectMapper.readValue(response.body(), new TypeReference<List<TourFx>>() {
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
+        logger.error("Could not find all Tours");
         return Collections.emptyList();
     }
 
@@ -81,6 +85,7 @@ public class TourHttpClient implements Dao<TourFx> {
 
     @Override
     public void update(TourFx tourFx) throws URISyntaxException, IOException {
+        logger.info("Update Tour with id: " + tourFx.getId());
         MapAPIServiceImpl mapAPIService = new MapAPIServiceImpl(tourFx.getFromDestination(), tourFx.getToDestination());
 
         //get data from mapAPI
@@ -91,28 +96,26 @@ public class TourHttpClient implements Dao<TourFx> {
         String pdfDirPATH = "target/res/PDF";
 
         File directoryImg = new File(imgDirPATH);
-        if (! directoryImg.exists()){
+        if (!directoryImg.exists()) {
             directoryImg.mkdirs();
         }
         File directoryLog = new File(logDirPATH);
 
-        if(! directoryLog.exists()){
+        if (!directoryLog.exists()) {
             directoryLog.mkdirs();
         }
         File directoryPdf = new File(pdfDirPATH);
 
-        if(! directoryPdf.exists()){
+        if (!directoryPdf.exists()) {
             directoryPdf.mkdirs();
         }
-
 
         var src = "target/res/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
 
         FileOutputStream fos = new FileOutputStream(src);
         try {
             IOUtils.copy(mapAPIService.queryMap(), fos);
-        }
-        finally {
+        } finally {
             fos.close();
         }
 
@@ -136,11 +139,12 @@ public class TourHttpClient implements Dao<TourFx> {
         // Print the response body
         logger.debug("Response body:");
         logger.debug(response.body());
-        System.out.println(response.body());
+        logger.info(response.body());
     }
 
     @Override
     public void delete(TourFx tourFx) {
+        logger.info("Delete Tour with id: " + tourFx.getId());
         try {
             // Create a request
             HttpRequest request = HttpRequest.newBuilder()
@@ -149,13 +153,39 @@ public class TourHttpClient implements Dao<TourFx> {
                     .DELETE()
                     .build();
 
+
             // Execute the request
             HttpResponse<String> response = getHttpResponse(request);
+
+            logger.debug(response.body());
+            logger.info(response.body());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @Override
+    public void addTour(TourFx tourFx) {
+        logger.info("Add Tour with id: " + tourFx.getId());
+        try {
+            // Create a request
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI("http://localhost:8080/tour/update"))
+                    .headers("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tourFx)))
+                    .build();
+
+            // Execute the request
+            HttpResponse<String> response = getHttpResponse(request);
+
+            // Print the response body
+            logger.debug("Response body:");
+            logger.debug(response.body());
+            logger.info(response.body());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private HttpRequest getHttpRequest(String s) throws URISyntaxException {
@@ -166,7 +196,7 @@ public class TourHttpClient implements Dao<TourFx> {
                 .build();
     }
 
-    private HttpResponse<String> getHttpResponse(HttpRequest request)  {
+    private HttpResponse<String> getHttpResponse(HttpRequest request) {
         try {
             // Execute the request
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -181,7 +211,7 @@ public class TourHttpClient implements Dao<TourFx> {
             logger.debug("Response body:");
             logger.debug(response.body());
             return response;
-        } catch(IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 

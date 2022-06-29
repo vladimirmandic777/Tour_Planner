@@ -10,6 +10,7 @@
                     <MenuItem text="Generate summary PDF report" onAction="#onGenerateReportClicked" />
                     <MenuItem text="Generate specific tour PDF report" onAction="#onGenerateTourReportClicked" />
                     <MenuItem text="Export Tour" onAction="#onExportTour" />
+                    <MenuItem text="Import Tour" onAction="#onImportTour" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Edit">

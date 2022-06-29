@@ -6,6 +6,7 @@ import at.technikum.tour_planner.listener.SelectionChangedListener;
 import at.technikum.tour_planner.model.TourFx;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 import java.util.ArrayList;

@@ -1,4 +1,5 @@
 package at.technikum.tour_planner.dal;
+
 import at.technikum.tour_planner.httpClient.TourHttpClient;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
 
-public class TourFxDao implements Dao<TourFx>  {
+public class TourFxDao implements Dao<TourFx> {
     private List<TourFx> tourItemsList = new ArrayList<>();
 
     private TourHttpClient httpClient = new TourHttpClient();
@@ -32,7 +33,7 @@ public class TourFxDao implements Dao<TourFx>  {
 
     @Override
     public TourFx create() {
-        var tour = new TourFx(getNewID(), "New Tour","","","","",0,"0","",null);
+        var tour = new TourFx(getNewID(), "New Tour", "", "", "", "", 0, "0", "", null);
         tourItemsList.add(tour);
         return tour;
     }
@@ -41,7 +42,7 @@ public class TourFxDao implements Dao<TourFx>  {
         int newId = 1;
         if (!tourItemsList.isEmpty()) {
             tourItemsList.sort(Comparator.comparing(TourFx::getId).reversed());
-            newId = tourItemsList.get(0).getId()+1;
+            newId = tourItemsList.get(0).getId() + 1;
         }
         return newId;
     }
@@ -71,5 +72,11 @@ public class TourFxDao implements Dao<TourFx>  {
     @Override
     public void delete(TourFx tourFx) {
         httpClient.delete(tourFx);
+    }
+
+    @Override
+    public void addTour(TourFx tourFx) {
+        tourItemsList.add(tourFx);
+        httpClient.addTour(tourFx);
     }
 }

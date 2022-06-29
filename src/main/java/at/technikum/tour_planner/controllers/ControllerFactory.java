@@ -1,5 +1,6 @@
 package at.technikum.tour_planner.controllers;
 
+import at.technikum.tour_planner.ImportTour.ImportTour;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.ImportTour.ExportTour;
@@ -23,13 +24,13 @@ public class ControllerFactory {
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(ControllerFactory.class);
 
     public ControllerFactory() {
-        navigationBarViewModel = new NavigationBarViewModel(new PDFListReportService(DAL.getInstance().tourDao()), new ExportTour(DAL.getInstance().tourDao()));
+        navigationBarViewModel = new NavigationBarViewModel(new PDFListReportService(DAL.getInstance().tourDao()), new ExportTour(DAL.getInstance().tourDao()), new ImportTour(DAL.getInstance().tourDao()));
         tourListViewModel = new TourListViewModel(DAL.getInstance().tourDao());
         tourDetailViewModel = new TourDetailViewModel();
         searchBarViewModel = new SearchBarViewModel();
         tourLogViewModel = new TourLogViewModel(DALLOG.getInstance().tourLogDao());
         mainWindowViewModel = new MainWindowViewModel(navigationBarViewModel, searchBarViewModel, tourListViewModel, tourDetailViewModel, tourLogViewModel);
-        
+
         checkFolder();
     }
 
