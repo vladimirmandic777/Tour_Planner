@@ -21,6 +21,11 @@
                         <HBox.margin>
                             <Insets left="10.0" />
                         </HBox.margin></Button>
+                <TextField fx:id="searchLogTextField" HBox.hgrow="NEVER" onKeyTyped="#onLogSearchKey">
+                <HBox.margin>
+                    <Insets left="10.0" />
+                </HBox.margin>
+                </TextField>
             </HBox>
             <TableView fx:id="logTable" VBox.vgrow="ALWAYS">
             </TableView>

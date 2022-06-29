@@ -1,31 +1,24 @@
 package at.technikum.tour_planner.controllers;
 
-import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.dal.DALLOG;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourLog;
-import at.technikum.tour_planner.viewModels.TourListViewModel;
 import at.technikum.tour_planner.viewModels.TourLogViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-import retrofit2.http.FieldMap;
 
 import java.net.URISyntaxException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Locale;
 
 public class TourLogController {
 
@@ -41,6 +34,9 @@ public class TourLogController {
     private TableColumn<TourLog, String> commentCol;
     private TableColumn<TourLog, Date> dateCol, timeCol;
     private TableColumn<TourLog, Integer> difficultyCol, ratingCol;
+
+    @FXML
+    private TextField searchLogTextField;
 
     public TourLogController(TourLogViewModel viewModel) {
         this.viewModel = viewModel;
@@ -66,6 +62,8 @@ public class TourLogController {
         logTable.setItems(viewModel.getTourLogs());
 
         editableCols();
+
+        searchLogTextField.textProperty().bindBidirectional(viewModel.searchStringProperty());
     }
 
     private void editableCols() {
@@ -107,5 +105,10 @@ public class TourLogController {
         } catch (URISyntaxException e) {
             logger.error(e.getMessage());
         }
+    }
+
+    public void onLogSearchKey(KeyEvent actionEvent) {
+        viewModel.doSearch();
+        logger.info("Searching...");
     }
 }

@@ -1,5 +1,6 @@
 package at.technikum.tour_planner.viewModels;
 
+import at.technikum.tour_planner.ImportTour.SearchLogService;
 import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.ImportTour.SearchService;
 
@@ -11,7 +12,6 @@ public class MainWindowViewModel {
     private TourLogViewModel tourLogViewModel;
 
 
-
     public MainWindowViewModel(NavigationBarViewModel navigationBarViewModel, SearchBarViewModel searchBarViewModel, TourListViewModel tourListViewModel, TourDetailViewModel tourDetailViewModel, TourLogViewModel tourLogViewModel) {
         this.navigationBarViewModel = navigationBarViewModel;
         this.searchBarViewModel = searchBarViewModel;
@@ -21,7 +21,8 @@ public class MainWindowViewModel {
 
 
         this.tourListViewModel.addSelectionChangedListener(this::selectTour);
-        this.searchBarViewModel.addSearchListener(searchString->searchTours(searchString));
+        this.searchBarViewModel.addSearchListener(this::searchTours);
+        this.tourLogViewModel.addLogSearchListener(this::searchLog);
     }
 
     private void searchTours(String searchString) {
@@ -29,6 +30,10 @@ public class MainWindowViewModel {
         tourListViewModel.setTours(tours);
     }
 
+    private void searchLog(String searchString) {
+        var tours = SearchLogService.getInstance().findMatchingLog(searchString, tourDetailViewModel.getTourFx().getId());
+        tourLogViewModel.setTourLogs(tours);
+    }
 
     private void selectTour(TourFx tourFx) {
         tourDetailViewModel.setTourModel(tourFx);
