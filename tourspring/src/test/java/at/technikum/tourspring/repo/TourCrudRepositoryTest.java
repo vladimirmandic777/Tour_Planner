@@ -19,7 +19,7 @@ public class TourCrudRepositoryTest {
     private TourCrudRepository tourCrudRepository;
 
 
-    @BeforeAll
+  //  @BeforeAll
     @Test
     public void addRepoTest() {
         Tour tour = Tour.builder().id(1).name("Test").description("test").fromDestination("Austria").toDestination("Vienna")
