@@ -14,7 +14,7 @@ public class PropertyConfigurationReader implements AppConfigurationReader {
     public AppConfiguration getAppConfiguration() {
         if (!initialized) {
             try {
-                log.info("Reading properties from file");
+                log.info("Reading properties from file:");
                 appProps.load(Thread.currentThread()
                         .getContextClassLoader()
                         .getResourceAsStream("app.properties"));

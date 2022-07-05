@@ -1,5 +1,6 @@
 package at.technikum.tour_planner.dal.map;
 
+import at.technikum.tour_planner.configuration.PropertyConfigurationReader;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import okhttp3.ResponseBody;
@@ -21,6 +22,7 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
     private RouteAPI routeTourAPI;
     private final String from;
     private final String to;
+    private final String ApiKey;
 
 
     public MapRouteRepository(String from, String to) throws IOException {
@@ -31,6 +33,9 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
         this.routeTourAPI = retrofit.create(RouteAPI.class);
         this.from = from;
         this.to = to;
+        PropertyConfigurationReader prop = new PropertyConfigurationReader();
+
+        this.ApiKey = prop.getAppConfiguration().getApiKey();
         //split in every method next code:
         //this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
 
@@ -39,22 +44,22 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
     }
     @Override
     public Map<String, Map<String, Double>> getBoundingBox() throws IOException {
-        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
+        this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
         return result.getRoute().getBoundingBox();
     }
     @Override
     public String getDistance() throws IOException {
-        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
+        this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
         return result.getRoute().getDistance();
     }
     @Override
     public String getTime() throws IOException {
-        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
+        this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
         return result.getRoute().getFormattedTime();
     }
     @Override
     public String getSessionId() throws IOException {
-        this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
+        this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
         return result.getRoute().getSessionId();
     }
 
@@ -70,7 +75,7 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
         logger.info("BoundingBox parameter: " + bb);
         Response<ResponseBody> responseMap = null;//, this.getBoundingBox()
         try {
-            responseMap = this.routeTourAPI.queryMap(from, to, this.getSessionId(), bb).execute();
+            responseMap = this.routeTourAPI.queryMap(this.ApiKey, from, to, this.getSessionId(), bb).execute();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

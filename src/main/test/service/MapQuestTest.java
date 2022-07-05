@@ -1,5 +1,7 @@
 package service;
 import at.technikum.tour_planner.ImportTour.MapAPIServiceImpl;
+import at.technikum.tour_planner.configuration.AppConfigurationLoader;
+import at.technikum.tour_planner.configuration.PropertyConfigurationReader;
 import at.technikum.tour_planner.dal.map.*;
 
 
@@ -63,6 +65,13 @@ public class MapQuestTest {
         try (FileOutputStream fos = new FileOutputStream(src)) {
             IOUtils.copy(mapRouteRepository2.queryMap(), fos);
         }
+    }
+
+    @Test
+    void testConfig(){
+        PropertyConfigurationReader prop = new PropertyConfigurationReader();
+        System.out.println("API_key: " + prop.getAppConfiguration().getApiKey());
+        assertEquals("QDZwAjNR027Tm8E9iwx29cvLlYIQb1da", prop.getAppConfiguration().getApiKey());
     }
 
 

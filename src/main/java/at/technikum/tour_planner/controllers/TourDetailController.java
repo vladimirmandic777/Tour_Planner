@@ -5,11 +5,9 @@ import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.viewModels.TourDetailViewModel;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -41,6 +39,13 @@ public class TourDetailController {
     public ImageView mapImageView;
     @FXML
     public TextArea description;
+    @FXML
+    public Button calculateCaloriesButton;
+    @FXML
+    public Label caloriesNumber;
+    @FXML
+    public ChoiceBox<String> tourTransportChoiceBox;
+    public SimpleStringProperty tourTransportChoiceBoxProperty = new SimpleStringProperty();
 
 
     private TourFx tourFx;
@@ -57,18 +62,14 @@ public class TourDetailController {
         tourName.textProperty().bindBidirectional(viewModel.nameProperty());
         tourFrom.textProperty().bindBidirectional(viewModel.fromProperty());
         tourTo.textProperty().bindBidirectional(viewModel.toProperty());
-        tourTransport.textProperty().bindBidirectional(viewModel.transportProperty());
+        //tourTransport.textProperty().bindBidirectional(viewModel.transportProperty());
+        tourTransportChoiceBoxProperty.bindBidirectional(viewModel.transportProperty());
         tourDistance.textProperty().bindBidirectional(viewModel.distanceProperty());
         tourDuration.textProperty().bindBidirectional(viewModel.durationProperty());
         description.textProperty().bindBidirectional(viewModel.descriptionProperty());
         mapImageView.imageProperty().bindBidirectional(viewModel.mapURLProperty());
-        // load the image
-        //if(viewModel.getTourFx() != null) {
-            /*var src = String.valueOf(viewModel.mapURLProperty());
-            System.out.println("src: " + src);
-            Image image = new Image(src);
-            mapImageView.setImage(image);*/
-        //}
+        caloriesNumber.textProperty().bindBidirectional(viewModel.caloriesProperty());
+
 
     }
 
@@ -76,6 +77,8 @@ public class TourDetailController {
 
         try {
             logger.info("Update Button clicked");
+            tourTransportChoiceBoxProperty = new SimpleStringProperty(tourTransportChoiceBox.getValue());
+            viewModel.transport.setValue(tourTransportChoiceBoxProperty.getValue());
             viewModel.updateTourModel();
             DAL.getInstance().tourDao().update(viewModel.getTourFx());
             viewModel.setTourModel(viewModel.getTourFx());
@@ -89,6 +92,10 @@ public class TourDetailController {
 
     public void changeTitle(KeyEvent keyEvent) {
        // viewModel.updateTourModel();
+    }
+    public void onCaloriesClickedButton(MouseEvent mouseEvent) {
+        tourTransportChoiceBoxProperty = new SimpleStringProperty(tourTransportChoiceBox.getValue());
+        viewModel.calculateCalories(tourTransportChoiceBoxProperty.getValue());
     }
 
 }

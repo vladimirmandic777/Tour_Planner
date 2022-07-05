@@ -1,11 +1,9 @@
 package at.technikum.tour_planner.viewModels;
 
+import at.technikum.tour_planner.ImportTour.Calories;
 import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.model.TourFx;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.image.Image;
 
 import java.util.Arrays;
@@ -15,15 +13,16 @@ public class TourDetailViewModel {
     private final StringProperty name = new SimpleStringProperty();
     private final StringProperty from = new SimpleStringProperty();
     private final StringProperty to = new SimpleStringProperty();
-    private final StringProperty transport = new SimpleStringProperty();
+    public final StringProperty transport = new SimpleStringProperty();
     private final StringProperty distance = new SimpleStringProperty();
     private final StringProperty duration = new SimpleStringProperty();
     private final StringProperty description = new SimpleStringProperty();
+    private final StringProperty calories = new SimpleStringProperty();
 
     private ObjectProperty<Image> mapURL = new SimpleObjectProperty<>();
 
     private volatile boolean isInitValue = false;
-    private TourFx tourFx;
+    public TourFx tourFx;
 
 
     public TourDetailViewModel() {
@@ -36,6 +35,7 @@ public class TourDetailViewModel {
         duration.addListener((arg, oldVal, newVal) -> updateTourModel());
         description.addListener((arg, oldVal, newVal) -> updateTourModel());
         mapURL.addListener((arg, oldVal, newVal) -> updateTourModel());
+
     }
 
     public void setTourModel(TourFx tourFx) {
@@ -57,6 +57,7 @@ public class TourDetailViewModel {
         var src = "file:target/res/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
         Image image = new Image(src);
         mapURL.setValue(image);
+        calories.setValue("");
         isInitValue = false;
     }
 
@@ -97,10 +98,17 @@ public class TourDetailViewModel {
     public ObjectProperty<Image> mapURLProperty() {
         return mapURL;
     }
+    public StringProperty caloriesProperty() {return calories;}
+
 
 
     public TourFx getTourFx() {
         return tourFx;
+    }
+
+    public void calculateCalories(String givenTransport) {
+        Calories caloriesCalculator = new Calories();;
+        calories.setValue(String.valueOf(caloriesCalculator.calculateCalories(givenTransport, Integer.valueOf(distance.getValue()))));
     }
 
 }

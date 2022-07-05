@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400" style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourDetailController">
+<VBox prefHeight="400" style="-fx-border-color: grey;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.technikum.tour_planner.controllers.TourDetailController">
 
     <HBox>
         <Label alignment="CENTER" onKeyPressed="#changeTitle" prefHeight="25.0" prefWidth="73.0" text="Title:" />
@@ -15,20 +17,26 @@
             <Insets left="20.0" />
         </HBox.margin></TextField>
     </HBox>
-    <SplitPane orientation="VERTICAL" VBox.vgrow="ALWAYS">
+    <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
 
     <TabPane tabClosingPolicy="UNAVAILABLE">
                 <tabs>
                     <Tab fx:id="routeTab" text="Route">
                         <ScrollPane>
-
+                            <HBox>
                         <VBox>
                             <HBox>
                                 <Label prefWidth="70" text="Name">
                         <padding>
                            <Insets right="10.0" />
-                        </padding></Label>
-                                <TextField fx:id="tourName" text="" HBox.hgrow="ALWAYS" />
+                        </padding>
+                              <HBox.margin>
+                                 <Insets top="10.0" />
+                              </HBox.margin></Label>
+                                <TextField fx:id="tourName" text="" HBox.hgrow="ALWAYS">
+                              <HBox.margin>
+                                 <Insets top="10.0" />
+                              </HBox.margin></TextField>
                             </HBox>
                             <HBox>
                                 <Label prefWidth="70" text="From">
@@ -45,13 +53,6 @@
                                 <TextField fx:id="tourTo" text="" HBox.hgrow="ALWAYS" />
                             </HBox>
                             <HBox>
-                                <Label prefWidth="70" text="Transport">
-                        <padding>
-                           <Insets right="10.0" />
-                        </padding></Label>
-                                <TextField fx:id="tourTransport" text="" HBox.hgrow="ALWAYS" />
-                            </HBox>
-                            <HBox>
                                 <Label prefWidth="70" text="Distance">
                         <padding>
                            <Insets right="10.0" />
@@ -65,11 +66,50 @@
                         </padding></Label>
                                 <Label fx:id="tourDuration" prefHeight="17.0" prefWidth="147.0" text="Duration" />
                             </HBox>
-                  <Button fx:id="updateButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onUpdateButton" text="Update" textAlignment="CENTER" />
-                            <padding>
-                                <Insets top="10" />
-                            </padding>
+
+
                         </VBox>
+
+                                <VBox>
+                                    <HBox>
+                                        <Label prefWidth="70" text="Transport">
+                                            <padding>
+                                                <Insets right="10.0" />
+                                                <Insets left="10.0" />
+                                            </padding>
+                              <HBox.margin>
+                                 <Insets left="5.0" top="10.0" />
+                              </HBox.margin></Label>
+                                        <ChoiceBox fx:id="tourTransportChoiceBox" prefWidth="150.0" value="Walking">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Walking" />
+                                                    <String fx:value="Running" />
+                                                    <String fx:value="Bike" />
+                                                    <String fx:value="Car" />
+                                                </FXCollections>
+                                            </items>
+                              <HBox.margin>
+                                 <Insets left="5.0" top="10.0" />
+                              </HBox.margin>
+                              <padding>
+                                 <Insets left="5.0" />
+                              </padding>
+                                        </ChoiceBox>
+                                    </HBox>
+                                    <HBox>
+                                        <Button fx:id="calculateCaloriesButton" onMouseClicked="#onCaloriesClickedButton" prefWidth="70" text="Calories">
+                              <opaqueInsets>
+                                 <Insets />
+                              </opaqueInsets>
+                              <HBox.margin>
+                                 <Insets left="10.0" top="10.0" />
+                              </HBox.margin></Button>
+                                        <Label fx:id="caloriesNumber" prefHeight="17.0" prefWidth="147.0" text="" />
+                                    </HBox>
+                        <HBox layoutX="10.0" layoutY="45.0" />
+                                </VBox>
+                            </HBox>
                         </ScrollPane>
                     </Tab>
 
@@ -82,6 +122,10 @@
                     </Tab>
                 </tabs>
             </TabPane>
+        <Button fx:id="updateButton" mnemonicParsing="false" onMouseClicked="#onUpdateButton" text="Update" textAlignment="CENTER" />
+        <padding>
+            <Insets top="10" />
+        </padding>
     </SplitPane>
 
 </VBox>
