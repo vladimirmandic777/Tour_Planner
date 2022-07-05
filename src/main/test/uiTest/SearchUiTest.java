@@ -3,6 +3,7 @@ package uiTest;
 import at.technikum.tour_planner.FXMLDependencyInjection;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.input.KeyCode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxAssert;
@@ -39,27 +40,36 @@ class SearchUiTest {
     }
 
     @Test
-    void testSearchWithBar(FxRobot robot) {
+    void
+    testSearchWithBar(FxRobot robot) {
         robot.lookup("#searchTextField").queryTextInputControl().setText("H");
-        robot.clickOn("#searchButton");
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
         assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(1);
     }
 
     @Test
     void testSearchWithNoValue(FxRobot robot) {
         robot.lookup("#searchTextField").queryTextInputControl().setText("Vladi");
-        robot.clickOn("#searchButton");
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
         assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(0);
     }
 
     @Test
     void testSearchWithDeleteSearchInput(FxRobot robot) {
         robot.lookup("#searchTextField").queryTextInputControl().setText("Vladi");
-        robot.clickOn("#searchButton");
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
         robot.clickOn("#clearButton");
         assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(2);
     }
 
+    @Test
+    @SuppressWarnings("unchecked")
+    void testSearchLogWithBar(FxRobot robot) {
+       robot.lookup("#listView").queryListView().getSelectionModel().selectLast();
+        robot.lookup("#searchLogTextField").queryTextInputControl().setText("Log");
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+        assertThat(robot.lookup("#commentCol").queryListView()).hasExactlyNumItems(1);
+    }
 
 
     /*
