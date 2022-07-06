@@ -105,7 +105,10 @@
                               <HBox.margin>
                                  <Insets left="10.0" top="10.0" />
                               </HBox.margin></Button>
-                                        <Label fx:id="caloriesNumber" prefHeight="17.0" prefWidth="147.0" text="" />
+                                        <Label fx:id="caloriesNumber" prefHeight="17.0" prefWidth="147.0" text="">
+                              <HBox.margin>
+                                 <Insets left="10.0" top="15.0" />
+                              </HBox.margin></Label>
                                     </HBox>
                         <HBox layoutX="10.0" layoutY="45.0" />
                                 </VBox>

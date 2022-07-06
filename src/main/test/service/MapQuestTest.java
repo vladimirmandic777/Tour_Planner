@@ -1,13 +1,10 @@
 package service;
+
 import at.technikum.tour_planner.ImportTour.MapAPIServiceImpl;
-import at.technikum.tour_planner.configuration.AppConfigurationLoader;
 import at.technikum.tour_planner.configuration.PropertyConfigurationReader;
-import at.technikum.tour_planner.dal.map.*;
-
-
+import at.technikum.tour_planner.dal.map.MapRouteRepository;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileOutputStream;
@@ -26,7 +23,7 @@ public class MapQuestTest {
 
 
     @Test
-     void testBoundingBox() throws IOException {
+    void testBoundingBox() throws IOException {
         MapRouteRepository mapRouteRepository = new MapRouteRepository("New+York,NY", "Washington,DC");
         assertNotNull(mapRouteRepository.getBoundingBox());
         assertEquals(38.892063, mapRouteRepository.getBoundingBox().get("lr").get("lat"));
@@ -41,12 +38,14 @@ public class MapQuestTest {
         logger.info("SessionId: " + mapRouteRepository.getSessionId());
 
     }
+
     @Test
     void testDistance() throws IOException {
         MapRouteRepository mapRouteRepository = new MapRouteRepository("Berlin", "Hamburg");
         assertEquals("180.006", mapRouteRepository.getDistance());
         logger.info("Distance: " + mapRouteRepository.getDistance());
     }
+
     @Test
     void testTime() throws IOException {
         MapRouteRepository mapRouteRepository = new MapRouteRepository("Dubrovnik", "Zadar");
@@ -63,12 +62,12 @@ public class MapQuestTest {
         logger.info("Map: " + mapRouteRepository2.queryMap().toString());
         var src = "target/res/images/mapImage" + "test" + ".jpg";
         try (FileOutputStream fos = new FileOutputStream(src)) {
-            IOUtils.copy(mapRouteRepository2.queryMap(), fos);
+            //IOUtils.copy(mapRouteRepository2.queryMap(), fos);
         }
     }
 
     @Test
-    void testConfig(){
+    void testConfig() {
         PropertyConfigurationReader prop = new PropertyConfigurationReader();
         System.out.println("API_key: " + prop.getAppConfiguration().getApiKey());
         assertEquals("QDZwAjNR027Tm8E9iwx29cvLlYIQb1da", prop.getAppConfiguration().getApiKey());
