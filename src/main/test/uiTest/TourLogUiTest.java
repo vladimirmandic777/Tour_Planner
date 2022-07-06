@@ -16,7 +16,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ApplicationExtension.class)
-public class TourListUITest {
+public class TourLogUiTest {
 
     @Start
     private void start(Stage stage) throws IOException {
@@ -25,24 +25,17 @@ public class TourListUITest {
         stage.show();
     }
 
-
-
-
     @Test
-    void addTour(FxRobot robot) {
-        int sizebefore  = robot.lookup("#listView").queryListView().getItems().size();
+    void addTourWithTourLog(FxRobot robot) {
+        int sizebefore = robot.lookup("#listView").queryListView().getItems().size();
         robot.clickOn("#addTour");
-        assertEquals(robot.lookup("#listView").queryListView().getItems().size(), sizebefore+1);
+        assertEquals(robot.lookup("#listView").queryListView().getItems().size(), sizebefore + 1);
+
+        robot.clickOn("#addTourLog");
+
+        assertEquals(robot.lookup("#logTable").queryTableView().getItems().size(), 1);
+
     }
 
-
-    @Test
-    void deleteTour(FxRobot robot) {
-        robot.clickOn("#addTour");
-        int sizebefore  = robot.lookup("#listView").queryListView().getItems().size();
-        robot.lookup("#listView").queryListView().getSelectionModel().selectLast();
-        robot.clickOn("#deleteTour");
-        assertEquals(robot.lookup("#listView").queryListView().getItems().size(), sizebefore-1);
-    }
 
 }
