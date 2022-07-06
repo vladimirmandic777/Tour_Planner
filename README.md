@@ -57,6 +57,8 @@ MapRequest
 
 # Unique Feature 
 Our unique feature is a calories tracker.
+The user can see the calories burned.
+The user can see how much calories he/she would burn by walking/running or with the bike. 
 
 # Time
 

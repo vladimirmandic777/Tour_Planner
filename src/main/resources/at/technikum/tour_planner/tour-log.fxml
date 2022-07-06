@@ -9,7 +9,7 @@
 
             <HBox>
                     <Label text="Logs:" />
-                    <Button text="➕" GridPane.columnIndex="2" onAction="#onButtonAdd">
+                    <Button fx:id="addTourLog" text="➕" GridPane.columnIndex="2" onAction="#onButtonAdd">
                         <HBox.margin>
                             <Insets left="100.0" />
                         </HBox.margin></Button>
