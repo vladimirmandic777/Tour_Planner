@@ -10,7 +10,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -110,11 +109,20 @@ public class TourHttpClient implements Dao<TourFx> {
         var src = "target/res/images/mapImage" + String.valueOf(tourFx.getId()) + ".jpg";
 
         FileOutputStream fos = new FileOutputStream(src);
-        try {
-            IOUtils.copy(mapAPIService.queryMap(), fos);
-        } finally {
-            fos.close();
-        }
+        mapAPIService.queryMap().thenAccept(is -> {
+            try {
+                IOUtils.copy(is, fos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
 
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody;
