@@ -26,7 +26,6 @@ public class TourDetailViewModel {
 
 
     public TourDetailViewModel() {
-        // this.mapTourService = mapTourService;
         name.addListener((arg, oldVal, newVal) -> updateTourModel());
         from.addListener((arg, oldVal, newVal) -> updateTourModel());
         to.addListener((arg, oldVal, newVal) -> updateTourModel());

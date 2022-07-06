@@ -53,7 +53,6 @@ public class PDFListReportService implements ReportService {
                     table.addCell(mediaItem.getDescription());
                 });
                 document.add(table);
-                //document.add(new AreaBreak());
             }
         } catch (IOException e) {
             e.printStackTrace();

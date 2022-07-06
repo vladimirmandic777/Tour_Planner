@@ -62,7 +62,6 @@ public class TourDetailController {
         tourName.textProperty().bindBidirectional(viewModel.nameProperty());
         tourFrom.textProperty().bindBidirectional(viewModel.fromProperty());
         tourTo.textProperty().bindBidirectional(viewModel.toProperty());
-        //tourTransport.textProperty().bindBidirectional(viewModel.transportProperty());
         tourTransportChoiceBoxProperty.bindBidirectional(viewModel.transportProperty());
         tourDistance.textProperty().bindBidirectional(viewModel.distanceProperty());
         tourDuration.textProperty().bindBidirectional(viewModel.durationProperty());
