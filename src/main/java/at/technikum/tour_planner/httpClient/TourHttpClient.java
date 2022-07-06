@@ -31,10 +31,7 @@ public class TourHttpClient implements Dao<TourFx> {
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourHttpClient.class);
 
 
-    private HttpClient client = HttpClient.newBuilder()
-            .version(HttpClient.Version.HTTP_2)
-            .connectTimeout(Duration.ofSeconds(5))
-            .build();
+    private HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).connectTimeout(Duration.ofSeconds(5)).build();
 
     @Override
     public Optional<TourFx> get(int id) {
@@ -122,17 +119,11 @@ public class TourHttpClient implements Dao<TourFx> {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody;
         try {
-            requestBody = objectMapper
-                    .writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(tourFx);
+            requestBody = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tourFx);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:8080/tour/update"))
-                .headers("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
+        HttpRequest request = HttpRequest.newBuilder().uri(new URI("http://localhost:8080/tour/update")).headers("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(requestBody)).build();
 
         HttpResponse<String> response = getHttpResponse(request);
 
@@ -147,11 +138,7 @@ public class TourHttpClient implements Dao<TourFx> {
         logger.info("Delete Tour with id: " + tourFx.getId());
         try {
             // Create a request
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/tour/delete/" + tourFx.getId()))
-                    .headers("Content-Type", "application/json")
-                    .DELETE()
-                    .build();
+            HttpRequest request = HttpRequest.newBuilder().uri(new URI("http://localhost:8080/tour/delete/" + tourFx.getId())).headers("Content-Type", "application/json").DELETE().build();
 
 
             // Execute the request
@@ -169,11 +156,7 @@ public class TourHttpClient implements Dao<TourFx> {
         logger.info("Add Tour with id: " + tourFx.getId());
         try {
             // Create a request
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(new URI("http://localhost:8080/tour/update"))
-                    .headers("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tourFx)))
-                    .build();
+            HttpRequest request = HttpRequest.newBuilder().uri(new URI("http://localhost:8080/tour/update")).headers("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tourFx))).build();
 
             // Execute the request
             HttpResponse<String> response = getHttpResponse(request);
@@ -189,11 +172,7 @@ public class TourHttpClient implements Dao<TourFx> {
 
 
     private HttpRequest getHttpRequest(String s) throws URISyntaxException {
-        return HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:8080/tour/" + s))
-                .header("User-Agent", "Java 11 HttpClient Bot")
-                .GET()
-                .build();
+        return HttpRequest.newBuilder().uri(new URI("http://localhost:8080/tour/" + s)).header("User-Agent", "Java 11 HttpClient Bot").GET().build();
     }
 
     private HttpResponse<String> getHttpResponse(HttpRequest request) {

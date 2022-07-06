@@ -26,7 +26,7 @@ public class TourDetailViewModel {
 
 
     public TourDetailViewModel() {
-       // this.mapTourService = mapTourService;
+        // this.mapTourService = mapTourService;
         name.addListener((arg, oldVal, newVal) -> updateTourModel());
         from.addListener((arg, oldVal, newVal) -> updateTourModel());
         to.addListener((arg, oldVal, newVal) -> updateTourModel());
@@ -76,21 +76,27 @@ public class TourDetailViewModel {
     public StringProperty nameProperty() {
         return name;
     }
+
     public StringProperty fromProperty() {
         return from;
     }
+
     public StringProperty toProperty() {
         return to;
     }
+
     public StringProperty transportProperty() {
         return transport;
     }
+
     public StringProperty distanceProperty() {
         return distance;
     }
+
     public StringProperty durationProperty() {
         return duration;
     }
+
     public StringProperty descriptionProperty() {
         return description;
     }
@@ -98,8 +104,10 @@ public class TourDetailViewModel {
     public ObjectProperty<Image> mapURLProperty() {
         return mapURL;
     }
-    public StringProperty caloriesProperty() {return calories;}
 
+    public StringProperty caloriesProperty() {
+        return calories;
+    }
 
 
     public TourFx getTourFx() {
@@ -107,7 +115,8 @@ public class TourDetailViewModel {
     }
 
     public void calculateCalories(String givenTransport) {
-        Calories caloriesCalculator = new Calories();;
+        Calories caloriesCalculator = new Calories();
+        ;
         calories.setValue(String.valueOf(caloriesCalculator.calculateCalories(givenTransport, Integer.valueOf(distance.getValue()))));
     }
 

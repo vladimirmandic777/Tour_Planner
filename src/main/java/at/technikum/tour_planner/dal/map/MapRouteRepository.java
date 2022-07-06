@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class MapRouteRepository implements MapRouteRepositoryAPI {
 
-    //private MapTourAPI mapTourAPI;
     private static final ILoggerWrapper logger = LoggerFactory.getLogger(MapRouteRepository.class);
     private Route result;
     private InputStream resultMap;
@@ -36,27 +35,26 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
         PropertyConfigurationReader prop = new PropertyConfigurationReader();
 
         this.ApiKey = prop.getAppConfiguration().getApiKey();
-        //split in every method next code:
-        //this.result = this.routeTourAPI.queryRoute(from, to).execute().body();
-
-
-
     }
+
     @Override
     public Map<String, Map<String, Double>> getBoundingBox() throws IOException {
         this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
         return result.getRoute().getBoundingBox();
     }
+
     @Override
     public String getDistance() throws IOException {
         this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
         return result.getRoute().getDistance();
     }
+
     @Override
     public String getTime() throws IOException {
         this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
         return result.getRoute().getFormattedTime();
     }
+
     @Override
     public String getSessionId() throws IOException {
         this.result = this.routeTourAPI.queryRoute(this.ApiKey, from, to).execute().body();
@@ -82,7 +80,6 @@ public class MapRouteRepository implements MapRouteRepositoryAPI {
         this.resultMap = responseMap.body().byteStream();
         return this.resultMap;
     }
-
 
 
 }

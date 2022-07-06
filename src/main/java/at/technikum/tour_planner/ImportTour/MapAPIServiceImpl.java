@@ -26,6 +26,7 @@ public class MapAPIServiceImpl implements MapAPIService {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public String queryTime() {
         try {
@@ -34,8 +35,9 @@ public class MapAPIServiceImpl implements MapAPIService {
             throw new RuntimeException(e);
         }
     }
+
     @Override
-    public InputStream queryMap(){
+    public InputStream queryMap() {
         return this.mapRouteRepository.getMap();
     }
 }

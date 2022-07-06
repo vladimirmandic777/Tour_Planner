@@ -9,8 +9,7 @@ public class Calories implements CaloriesService {
             calories = (int) (distance * 76);
         } else if (transportation.equals("Running")) {
             calories = (int) (distance * 155);
-        }
-        else if (transportation.equals("Bike")) {
+        } else if (transportation.equals("Bike")) {
             calories = (int) (distance * 84);
         }
         return String.valueOf(calories);

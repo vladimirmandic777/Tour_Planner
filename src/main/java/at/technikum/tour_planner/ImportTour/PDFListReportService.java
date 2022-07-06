@@ -55,14 +55,15 @@ public class PDFListReportService implements ReportService {
                 document.add(table);
                 //document.add(new AreaBreak());
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void generateTourReport(TourFx tourfx){
+    public void generateTourReport(TourFx tourfx) {
         try {
-            PdfWriter writer = new PdfWriter(TARGET_PDF + "TourReport-"+tourfx.getName() + "-" + LocalDate.now() + ".pdf");
+            PdfWriter writer = new PdfWriter(TARGET_PDF + "TourReport-" + tourfx.getName() + "-" + LocalDate.now() + ".pdf");
             PdfDocument pdf = new PdfDocument(writer);
             try (Document document = new Document(pdf)) {
                 ImageData imageData = ImageDataFactory.create(new URL("https://www.technikum-wien.at/sites/default/files/logo-300x160.png"));
@@ -95,9 +96,9 @@ public class PDFListReportService implements ReportService {
                 document.add(logTable);
                 document.add(new AreaBreak());
                 ImageData mapImage = ImageDataFactory.create(new URL("file:target/res/images/mapImage" + String.valueOf(tourfx.getId()) + ".jpg"));
-                document.add(new Image(mapImage).setFixedPosition(100,250));
+                document.add(new Image(mapImage).setFixedPosition(100, 250));
             }
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -113,6 +114,7 @@ public class PDFListReportService implements ReportService {
         table.addHeaderCell(getHeaderCell("Description"));
         return table;
     }
+
     private Table setupLogTable() {
         Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth();
         table.setFontSize(14).setBackgroundColor(ColorConstants.WHITE);

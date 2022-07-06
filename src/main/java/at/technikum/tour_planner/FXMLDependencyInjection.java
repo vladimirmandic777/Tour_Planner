@@ -22,7 +22,7 @@ public class FXMLDependencyInjection {
                 FXMLDependencyInjection.class.getResource(location),
                 null,//ResourceBundle.getBundle("at.technikum.tour_planner" + "gui_strings", locale),
                 new JavaFXBuilderFactory(),
-                controllerClass-> ControllerFactory.getInstance().create(controllerClass)
+                controllerClass -> ControllerFactory.getInstance().create(controllerClass)
         );
     }
 }

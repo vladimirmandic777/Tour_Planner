@@ -1,18 +1,18 @@
 package at.technikum.tour_planner.controllers;
 
 import at.technikum.tour_planner.ImportTour.ImportTour;
-import at.technikum.tour_planner.logger.ILoggerWrapper;
-import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.ImportTour.ExportTour;
 import at.technikum.tour_planner.ImportTour.PDFListReportService;
 import at.technikum.tour_planner.dal.DAL;
 import at.technikum.tour_planner.dal.DALLOG;
 import at.technikum.tour_planner.viewModels.*;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+@Log4j2
 public class ControllerFactory {
     private final MainWindowViewModel mainWindowViewModel;
     private final NavigationBarViewModel navigationBarViewModel;
@@ -20,8 +20,6 @@ public class ControllerFactory {
     private final TourDetailViewModel tourDetailViewModel;
     private final SearchBarViewModel searchBarViewModel;
     private final TourLogViewModel tourLogViewModel;
-
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger(ControllerFactory.class);
 
     public ControllerFactory() {
         navigationBarViewModel = new NavigationBarViewModel(new PDFListReportService(DAL.getInstance().tourDao()), new ExportTour(DAL.getInstance().tourDao()), new ImportTour(DAL.getInstance().tourDao()));
@@ -42,10 +40,11 @@ public class ControllerFactory {
                 try {
                     Files.createDirectories(of);
                 } catch (IOException e) {
-                    logger.error(e.getMessage());
+                    log.error(e.getMessage());
                 }
             }
         }
+        log.info("Folders created");
     }
 
     public Object create(Class<?> controllerClass) {
@@ -62,6 +61,7 @@ public class ControllerFactory {
         } else if (controllerClass == TourLogController.class) {
             return new TourLogController(tourLogViewModel);
         } else {
+            log.error("Unknown controller class: " + controllerClass.getName());
             throw new IllegalArgumentException("Unknown controller class: " + controllerClass.getName());
         }
     }

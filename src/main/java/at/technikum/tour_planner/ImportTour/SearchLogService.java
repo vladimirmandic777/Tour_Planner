@@ -19,11 +19,11 @@ public class SearchLogService {
     public List<TourLog> findMatchingLog(String searchText, int id) {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         var tours = tourLogDao.getLog(id);
-        if (searchText==null || searchText.isEmpty()) {
+        if (searchText == null || searchText.isEmpty()) {
             return tours;
         }
         return tours.stream()
-                .filter(t->t.getComment().toLowerCase().contains(searchText.toLowerCase())
+                .filter(t -> t.getComment().toLowerCase().contains(searchText.toLowerCase())
                         || format.format(t.getDate()).toLowerCase().contains(searchText.toLowerCase())
                         || format.format(t.getTime()).toLowerCase().contains(searchText.toLowerCase())
                         || String.valueOf(t.getDifficulty()).toLowerCase().contains(searchText.toLowerCase())
@@ -37,5 +37,7 @@ public class SearchLogService {
     // TO-DO
     private static SearchLogService instance = new SearchLogService(DALLOG.getInstance().tourLogDao());
 
-    public static SearchLogService getInstance() { return instance; }
+    public static SearchLogService getInstance() {
+        return instance;
+    }
 }

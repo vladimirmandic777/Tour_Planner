@@ -1,8 +1,6 @@
 package at.technikum.tour_planner.controllers;
 
 import at.technikum.tour_planner.dal.DALLOG;
-import at.technikum.tour_planner.logger.ILoggerWrapper;
-import at.technikum.tour_planner.logger.LoggerFactory;
 import at.technikum.tour_planner.model.TourLog;
 import at.technikum.tour_planner.viewModels.TourLogViewModel;
 import javafx.event.ActionEvent;
@@ -16,10 +14,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import lombok.extern.log4j.Log4j2;
 
 import java.net.URISyntaxException;
 import java.util.Date;
 
+@Log4j2
 public class TourLogController {
 
 
@@ -27,8 +27,6 @@ public class TourLogController {
     public TableView<TourLog> logTable;
 
     private final TourLogViewModel viewModel;
-
-    private static final ILoggerWrapper logger = LoggerFactory.getLogger(TourListController.class);
 
     @FXML
     private TableColumn<TourLog, String> commentCol;
@@ -86,29 +84,29 @@ public class TourLogController {
 
 
     public void onButtonRemove(ActionEvent actionEvent) {
-        logger.info("Delete Button clicked");
+        log.info("Delete Button clicked with the id {}", logTable.getSelectionModel().getSelectedItem().getId());
         DALLOG.getInstance().tourLogDao().delete(logTable.getSelectionModel().getSelectedItem());
         viewModel.deleteTourLog(logTable.getSelectionModel().getSelectedItem());
     }
 
     public void onButtonAdd(ActionEvent actionEvent) {
-        logger.info("Added a new Tour log");
+        log.info("Added a new Tour log");
         viewModel.addNewLog();
         logTable.getSelectionModel().selectLast();
     }
 
     public void onUpdateButton(MouseEvent mouseEvent) {
         try {
-            logger.info("Update Button clicked");
+            log.info("Update Button clicked with the id {}", logTable.getSelectionModel().getSelectedItem().getId());
             viewModel.updateLogModel(logTable.getSelectionModel().getSelectedItem());
             DALLOG.getInstance().tourLogDao().update(logTable.getSelectionModel().getSelectedItem());
         } catch (URISyntaxException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
     public void onLogSearchKey(KeyEvent actionEvent) {
         viewModel.doSearch();
-        logger.info("Searching...");
+        log.info("Searching...");
     }
 }

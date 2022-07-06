@@ -14,10 +14,10 @@ public class SearchBarViewModel {
     private List<SearchListener> listeners = new ArrayList<>();
 
     private final StringProperty searchString = new SimpleStringProperty("");
-    private final BooleanBinding isSearchDisabledBinding = Bindings.createBooleanBinding( ()->searchString.get().isEmpty() );
+    private final BooleanBinding isSearchDisabledBinding = Bindings.createBooleanBinding(() -> searchString.get().isEmpty());
 
     public SearchBarViewModel() {
-        searchString.addListener( (arg, oldVal, newVal)->isSearchDisabledBinding.invalidate() );
+        searchString.addListener((arg, oldVal, newVal) -> isSearchDisabledBinding.invalidate());
     }
 
     public StringProperty searchStringProperty() {
@@ -37,7 +37,7 @@ public class SearchBarViewModel {
     }
 
     public void doSearch() {
-        for (var listener : listeners ) {
+        for (var listener : listeners) {
             listener.search(searchString.get());
         }
     }

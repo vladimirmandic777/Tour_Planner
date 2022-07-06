@@ -1,6 +1,5 @@
 package at.technikum.tour_planner.dal;
 
-import at.technikum.tour_planner.model.TourFx;
 import at.technikum.tour_planner.model.TourLog;
 
 public class DALLOG {
@@ -11,9 +10,6 @@ public class DALLOG {
         logDao = new TourLogDao();
     }
 
-    //
-    // Logs
-    //
     public DaoLog<TourLog> tourLogDao() {
         return logDao;
     }

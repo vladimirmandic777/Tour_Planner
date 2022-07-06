@@ -21,11 +21,11 @@ public class SearchService {
 
     public List<TourFx> findMatchingTours(String searchText) {
         var tours = tourFxDao.getAll();
-        if (searchText==null || searchText.isEmpty()) {
+        if (searchText == null || searchText.isEmpty()) {
             return tours;
         }
         return tours.stream()
-                .filter(t->t.getName().toLowerCase().contains(searchText.toLowerCase()))
+                .filter(t -> t.getName().toLowerCase().contains(searchText.toLowerCase()))
                 .collect(Collectors.toList());
     }
 
@@ -35,5 +35,7 @@ public class SearchService {
     // TO-DO
     private static SearchService instance = new SearchService(DAL.getInstance().tourDao());
 
-    public static SearchService getInstance() { return instance; }
+    public static SearchService getInstance() {
+        return instance;
+    }
 }

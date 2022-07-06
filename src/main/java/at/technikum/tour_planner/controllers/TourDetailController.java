@@ -91,7 +91,6 @@ public class TourDetailController {
     }
 
     public void changeTitle(KeyEvent keyEvent) {
-       // viewModel.updateTourModel();
     }
     public void onCaloriesClickedButton(MouseEvent mouseEvent) {
         tourTransportChoiceBoxProperty = new SimpleStringProperty(tourTransportChoiceBox.getValue());

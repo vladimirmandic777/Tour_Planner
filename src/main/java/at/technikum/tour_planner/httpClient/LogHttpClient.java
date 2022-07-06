@@ -51,7 +51,8 @@ public class LogHttpClient implements DaoLog<TourLog> {
             logger.debug("Response body:");
             logger.debug(response.body());
 
-            return objectMapper.readValue(response.body(), new TypeReference<List<TourLog>>() {});
+            return objectMapper.readValue(response.body(), new TypeReference<List<TourLog>>() {
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +82,8 @@ public class LogHttpClient implements DaoLog<TourLog> {
             logger.debug("Response body:");
             logger.debug(response.body());
 
-            return objectMapper.readValue(response.body(), new TypeReference<List<TourLog>>() {});
+            return objectMapper.readValue(response.body(), new TypeReference<List<TourLog>>() {
+            });
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +121,7 @@ public class LogHttpClient implements DaoLog<TourLog> {
 
     @Override
     public void update(TourLog tourLog) {
-        try{
+        try {
             ObjectMapper objectMapper = new ObjectMapper();
             String requestBody;
             try {
@@ -140,13 +142,13 @@ public class LogHttpClient implements DaoLog<TourLog> {
             // Print the response body
             logger.debug("Response body:");
             logger.debug(response.body());
-        }  catch (URISyntaxException e) {
+        } catch (URISyntaxException e) {
             logger.error("Error with Updating Log");
         }
     }
 
 
-    private HttpResponse<String> getHttpResponse(HttpRequest request)  {
+    private HttpResponse<String> getHttpResponse(HttpRequest request) {
         try {
             // Execute the request
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -161,7 +163,7 @@ public class LogHttpClient implements DaoLog<TourLog> {
             logger.debug("Response body:");
             logger.debug(response.body());
             return response;
-        } catch(IOException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
 
