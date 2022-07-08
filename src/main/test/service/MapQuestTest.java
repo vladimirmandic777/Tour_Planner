@@ -5,6 +5,7 @@ import at.technikum.tour_planner.configuration.PropertyConfigurationReader;
 import at.technikum.tour_planner.dal.map.MapRouteRepository;
 import at.technikum.tour_planner.logger.ILoggerWrapper;
 import at.technikum.tour_planner.logger.LoggerFactory;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileOutputStream;
@@ -61,9 +62,20 @@ public class MapQuestTest {
         assertNotNull(mapRouteRepository2.queryMap());
         logger.info("Map: " + mapRouteRepository2.queryMap().toString());
         var src = "target/res/images/mapImage" + "test" + ".jpg";
-        try (FileOutputStream fos = new FileOutputStream(src)) {
-            //IOUtils.copy(mapRouteRepository2.queryMap(), fos);
-        }
+        FileOutputStream fos = new FileOutputStream(src);
+        mapRouteRepository2.queryMap().thenAccept(is -> {
+            try {
+                IOUtils.copy(is, fos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Test
