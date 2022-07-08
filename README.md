@@ -39,7 +39,7 @@ Like tour Logs can get added, delete and edited.
 By clicking on the buttons + (adding) and - (deleting) above the logList, a new log can be added or deleted.
 The other icon edits the log. 
 
-And in the textfield it is possible to search for a log.
+And in the text-field it is possible to search for a log.
 
 
 # Unit Test
@@ -47,7 +47,7 @@ And in the textfield it is possible to search for a log.
 For the backend the unit test is done with JUnit.
 For the units tests it was important to me to test the service classes, because here an error can arise quickly.
 For test data the repository test where a method to test the backend and also play with the data on the frontend.
-For the communication with the backend it was important to test the HttpClient and the controller Test that the work.
+For the communication with the backend it was significant to test the HttpClient and the controller Test that the work.
 
 ## Frontend
 For the frontend the unit test is done with JUnit and made same Robot Test. 
@@ -56,9 +56,9 @@ The test was to search for an Item.
 MapRequest 
 
 # Unique Feature 
-Our unique feature is a calories tracker.
+Our unique feature is a calories' tracker.
 The user can see the calories burned.
-The user can see how much calories he/she would burn by walking/running or with the bike. 
+The user can see how many calories he/she would burn by walking/running or with the bike. 
 
 # Time
 
@@ -71,7 +71,7 @@ but from the git history you can see that I did a lot in the beginning and then 
 Better time management for the semester.
 Divide code into different classes and methods so that the code is easy to adapt later and also easier to test. 
 Having a clear idea about the backend and also the frontend is important and also how the can communicate with each other.
-The structure of the frontend and how to structure the UI and each element is important.
+The structure of the frontend and how to structure the UI and each element is significant.
 
 # Github
 
