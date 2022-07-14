@@ -39,8 +39,8 @@ public class PDFListReportService implements ReportService {
             PdfWriter writer = new PdfWriter(TARGET_PDF + "TourListReport" + LocalDate.now() + ".pdf");
             PdfDocument pdf = new PdfDocument(writer);
             try (Document document = new Document(pdf)) {
-                ImageData imageData = ImageDataFactory.create(new URL("https://www.technikum-wien.at/sites/default/files/logo-300x160.png"));
-                document.add(new Image(imageData));
+              //  ImageData imageData = ImageDataFactory.create(new URL("https://www.technikum-wien.at/fhtw-logo.svg"));
+             //   document.add(new Image(imageData));
                 document.add(generateTourHeader());
                 document.add(generateTableHeader("Overview of Tours"));
                 Table table = setupTable();
@@ -65,8 +65,8 @@ public class PDFListReportService implements ReportService {
             PdfWriter writer = new PdfWriter(TARGET_PDF + "TourReport-" + tourfx.getName() + "-" + LocalDate.now() + ".pdf");
             PdfDocument pdf = new PdfDocument(writer);
             try (Document document = new Document(pdf)) {
-                ImageData imageData = ImageDataFactory.create(new URL("https://www.technikum-wien.at/sites/default/files/logo-300x160.png"));
-                document.add(new Image(imageData));
+             //   ImageData imageData = ImageDataFactory.create(new URL("https://www.technikum-wien.at/sites/default/files/logo-300x160.png"));
+               // document.add(new Image(imageData));
                 document.add(new Paragraph("Tour -" + tourfx.getName() + "- report")
                         .setFont(PdfFontFactory.createFont(StandardFonts.TIMES_ROMAN))
                         .setFontSize(18)

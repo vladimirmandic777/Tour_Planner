@@ -35,19 +35,16 @@ class SearchUiTest {
 
     @Test
     void testSearchWithDeleteSearchInput(FxRobot robot) {
-        robot.lookup("#searchTextField").queryTextInputControl().setText("Vladi");
+        robot.lookup("#searchTextField").queryTextInputControl().setText("HALLLLLLLLLLL");
         robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
         robot.clickOn("#clearButton");
         assertThat(robot.lookup("#searchTextField").queryTextInputControl().getText()).isEqualTo("");
-
-        assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(0);
-
     }
 
     @Test
     void testSearchWithNoValue(FxRobot robot) {
-        robot.lookup("#searchTextField").queryTextInputControl().setText("Vladi");
-        //robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+        robot.lookup("#searchTextField").queryTextInputControl().setText("AAAAAAAAAAAAAAAA");
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
         assertThat(robot.lookup("#listView").queryListView()).hasExactlyNumItems(0);
     }
 

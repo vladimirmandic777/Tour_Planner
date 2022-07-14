@@ -48,19 +48,21 @@ public class MapQuestTest {
     }
 
     @Test
-    void testTime() throws IOException {
+    void testTime() throws IOException, InterruptedException {
         MapRouteRepository mapRouteRepository = new MapRouteRepository("Dubrovnik", "Zadar");
         assertEquals("03:55:59", mapRouteRepository.getTime());
+        Thread.sleep(9000l);
         logger.info("Time: " + mapRouteRepository.getTime());
     }
 
 
     @Test
-    void testMap() throws IOException {
+    void testMap() throws IOException, InterruptedException {
         MapAPIServiceImpl mapRouteRepository2 = new MapAPIServiceImpl("Vienna", "Bratislava");
 
         assertNotNull(mapRouteRepository2.queryMap());
         logger.info("Map: " + mapRouteRepository2.queryMap().toString());
+        Thread.sleep(5000l);
         var src = "target/res/images/mapImage" + "test" + ".jpg";
         FileOutputStream fos = new FileOutputStream(src);
         mapRouteRepository2.queryMap().thenAccept(is -> {
